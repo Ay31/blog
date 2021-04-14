@@ -5,22 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.0">
-
-
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ay31/blog/css/main.css">
 
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"github.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;github.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.3.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
-<meta property="og:type" content="website">
+  <meta property="og:type" content="website">
 <meta property="og:title" content="y31&#39;s blog">
 <meta property="og:url" content="https://github.com/Ay31/blog/page/2/index.html">
 <meta property="og:site_name" content="y31&#39;s blog">
@@ -28,45 +28,72 @@
 <meta property="article:author" content="york">
 <meta name="twitter:card" content="summary">
 
-
 <link rel="canonical" href="https://github.com/Ay31/blog/page/2/">
 
 
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:true,&quot;isPost&quot;:false,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:&quot;&quot;,&quot;permalink&quot;:&quot;&quot;,&quot;path&quot;:&quot;page&#x2F;2&#x2F;index.html&quot;,&quot;title&quot;:&quot;&quot;}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>y31's blog</title><script src="/js/config.js"></script>
+  <title>y31's blog</title>
   
 
 
 
 
+
+
   <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏" role="button">
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
+      <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">y31's blog</h1>
-      <i class="logo-line"></i>
+      <span class="logo-line-after"><i></i></span>
     </a>
   </div>
 
@@ -78,11 +105,19 @@
 
 
 
+
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
   </ul>
 </nav>
 
@@ -90,102 +125,30 @@
 
 
 </div>
-        
-  
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-overview-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="york"
-      src="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
-  <p class="site-author-name" itemprop="name">york</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap site-overview-item animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">39</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">标签</span>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author site-overview-item animated">
-      <span class="links-of-author-item">
-        <a href="mailto:525998520@qq.com" title="E-Mail → mailto:525998520@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-  </div>
-
-
-
-        </div>
-      </div>
-    </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
     </header>
 
     
-  <div class="back-to-top" role="button" aria-label="返回顶部">
+  <div class="back-to-top">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
 
-    <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
+          <div class="content index posts-expand">
+            
+      
   
   
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://github.com/Ay31/blog/2019/08/29/Vue%E5%85%A5%E9%97%A8/Vue%20%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/ay31/blog/images/avatar.gif">
       <meta itemprop="name" content="york">
       <meta itemprop="description" content="">
     </span>
@@ -195,38 +158,37 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/08/29/Vue%E5%85%A5%E9%97%A8/Vue%20%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">Vue基础</a>
+          
+            <a href="/2019/08/29/Vue%E5%85%A5%E9%97%A8/Vue%20%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">Vue基础</a>
         </h2>
 
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2019-08-29 02:57:54" itemprop="dateCreated datePublished" datetime="2019-08-29T02:57:54+08:00">2019-08-29</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-14 11:43:00" itemprop="dateModified" datetime="2021-04-14T11:43:00+08:00">2021-04-14</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Vue%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">Vue入门</span></a>
-        </span>
-    </span>
+              <time title="创建时间：2019-08-29 02:57:54" itemprop="dateCreated datePublished" datetime="2019-08-29T02:57:54+08:00">2019-08-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-14 11:43:00" itemprop="dateModified" datetime="2021-04-14T11:43:00+08:00">2021-04-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">Vue入门</span></a>
+                </span>
+            </span>
 
-  
-</div>
+          
 
         </div>
       </header>
@@ -235,6 +197,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>计算属性 侦听器 方法</p>
           <!--noindex-->
             <div class="post-button">
@@ -250,29 +214,22 @@
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
+      </footer>
   </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
+  
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://github.com/Ay31/blog/2019/08/26/Vue%E5%85%A5%E9%97%A8/Vue%E5%AE%9E%E4%BE%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/ay31/blog/images/avatar.gif">
       <meta itemprop="name" content="york">
       <meta itemprop="description" content="">
     </span>
@@ -282,38 +239,37 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/08/26/Vue%E5%85%A5%E9%97%A8/Vue%E5%AE%9E%E4%BE%8B/" class="post-title-link" itemprop="url">Vue实例</a>
+          
+            <a href="/2019/08/26/Vue%E5%85%A5%E9%97%A8/Vue%E5%AE%9E%E4%BE%8B/" class="post-title-link" itemprop="url">Vue实例</a>
         </h2>
 
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2019-08-26 16:27:54" itemprop="dateCreated datePublished" datetime="2019-08-26T16:27:54+08:00">2019-08-26</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-14 11:45:03" itemprop="dateModified" datetime="2021-04-14T11:45:03+08:00">2021-04-14</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Vue%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">Vue入门</span></a>
-        </span>
-    </span>
+              <time title="创建时间：2019-08-26 16:27:54" itemprop="dateCreated datePublished" datetime="2019-08-26T16:27:54+08:00">2019-08-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-14 11:45:03" itemprop="dateModified" datetime="2021-04-14T11:45:03+08:00">2021-04-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">Vue入门</span></a>
+                </span>
+            </span>
 
-  
-</div>
+          
 
         </div>
       </header>
@@ -322,6 +278,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>创建一个Vue实例 数据与方法 生命周期</p>
           <!--noindex-->
             <div class="post-button">
@@ -337,29 +295,22 @@
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
+      </footer>
   </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
+  
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://github.com/Ay31/blog/2019/08/23/Understanding%20ECMAScript%206/Generator/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/ay31/blog/images/avatar.gif">
       <meta itemprop="name" content="york">
       <meta itemprop="description" content="">
     </span>
@@ -369,38 +320,37 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/08/23/Understanding%20ECMAScript%206/Generator/" class="post-title-link" itemprop="url">Generator</a>
+          
+            <a href="/2019/08/23/Understanding%20ECMAScript%206/Generator/" class="post-title-link" itemprop="url">Generator</a>
         </h2>
 
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2019-08-23 20:38:54" itemprop="dateCreated datePublished" datetime="2019-08-23T20:38:54+08:00">2019-08-23</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-14 16:04:33" itemprop="dateModified" datetime="2021-04-14T16:04:33+08:00">2021-04-14</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Understanding-ECMAScript-6/" itemprop="url" rel="index"><span itemprop="name">Understanding ECMAScript 6</span></a>
-        </span>
-    </span>
+              <time title="创建时间：2019-08-23 20:38:54" itemprop="dateCreated datePublished" datetime="2019-08-23T20:38:54+08:00">2019-08-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-14 16:04:33" itemprop="dateModified" datetime="2021-04-14T16:04:33+08:00">2021-04-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Understanding-ECMAScript-6/" itemprop="url" rel="index"><span itemprop="name">Understanding ECMAScript 6</span></a>
+                </span>
+            </span>
 
-  
-</div>
+          
 
         </div>
       </header>
@@ -409,6 +359,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>Generator Iterator</p>
           <!--noindex-->
             <div class="post-button">
@@ -424,29 +376,22 @@
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
+      </footer>
   </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
+  
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://github.com/Ay31/blog/2019/08/23/Understanding%20ECMAScript%206/%E7%AC%AC%E5%8D%81%E4%B8%89%E7%AB%A0%20%E7%94%A8%E6%A8%A1%E5%9D%97%E5%B0%81%E8%A3%85%E4%BB%A3%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/ay31/blog/images/avatar.gif">
       <meta itemprop="name" content="york">
       <meta itemprop="description" content="">
     </span>
@@ -456,38 +401,37 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/08/23/Understanding%20ECMAScript%206/%E7%AC%AC%E5%8D%81%E4%B8%89%E7%AB%A0%20%E7%94%A8%E6%A8%A1%E5%9D%97%E5%B0%81%E8%A3%85%E4%BB%A3%E7%A0%81/" class="post-title-link" itemprop="url">用模块封装代码</a>
+          
+            <a href="/2019/08/23/Understanding%20ECMAScript%206/%E7%AC%AC%E5%8D%81%E4%B8%89%E7%AB%A0%20%E7%94%A8%E6%A8%A1%E5%9D%97%E5%B0%81%E8%A3%85%E4%BB%A3%E7%A0%81/" class="post-title-link" itemprop="url">用模块封装代码</a>
         </h2>
 
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2019-08-23 17:38:54" itemprop="dateCreated datePublished" datetime="2019-08-23T17:38:54+08:00">2019-08-23</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-14 16:04:22" itemprop="dateModified" datetime="2021-04-14T16:04:22+08:00">2021-04-14</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Understanding-ECMAScript-6/" itemprop="url" rel="index"><span itemprop="name">Understanding ECMAScript 6</span></a>
-        </span>
-    </span>
+              <time title="创建时间：2019-08-23 17:38:54" itemprop="dateCreated datePublished" datetime="2019-08-23T17:38:54+08:00">2019-08-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-14 16:04:22" itemprop="dateModified" datetime="2021-04-14T16:04:22+08:00">2021-04-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Understanding-ECMAScript-6/" itemprop="url" rel="index"><span itemprop="name">Understanding ECMAScript 6</span></a>
+                </span>
+            </span>
 
-  
-</div>
+          
 
         </div>
       </header>
@@ -496,6 +440,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>模块的定义 模块的导出 ...</p>
           <!--noindex-->
             <div class="post-button">
@@ -511,29 +457,22 @@
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
+      </footer>
   </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
+  
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://github.com/Ay31/blog/2019/08/23/Understanding%20ECMAScript%206/%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0%20Promise%E4%B8%8E%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/ay31/blog/images/avatar.gif">
       <meta itemprop="name" content="york">
       <meta itemprop="description" content="">
     </span>
@@ -543,38 +482,37 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/08/23/Understanding%20ECMAScript%206/%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0%20Promise%E4%B8%8E%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">Promise与异步编程</a>
+          
+            <a href="/2019/08/23/Understanding%20ECMAScript%206/%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0%20Promise%E4%B8%8E%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">Promise与异步编程</a>
         </h2>
 
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2019-08-23 14:38:54" itemprop="dateCreated datePublished" datetime="2019-08-23T14:38:54+08:00">2019-08-23</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-14 16:04:11" itemprop="dateModified" datetime="2021-04-14T16:04:11+08:00">2021-04-14</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Understanding-ECMAScript-6/" itemprop="url" rel="index"><span itemprop="name">Understanding ECMAScript 6</span></a>
-        </span>
-    </span>
+              <time title="创建时间：2019-08-23 14:38:54" itemprop="dateCreated datePublished" datetime="2019-08-23T14:38:54+08:00">2019-08-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-14 16:04:11" itemprop="dateModified" datetime="2021-04-14T16:04:11+08:00">2021-04-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Understanding-ECMAScript-6/" itemprop="url" rel="index"><span itemprop="name">Understanding ECMAScript 6</span></a>
+                </span>
+            </span>
 
-  
-</div>
+          
 
         </div>
       </header>
@@ -583,6 +521,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>异步编程 Promise ...</p>
           <!--noindex-->
             <div class="post-button">
@@ -598,29 +538,22 @@
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
+      </footer>
   </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
+  
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://github.com/Ay31/blog/2019/08/23/Understanding%20ECMAScript%206/%E7%AC%AC%E5%8D%81%E7%AB%A0%20%E5%A2%9E%E5%BC%BA%E7%9A%84%E6%95%B0%E7%BB%84%E5%8A%9F%E8%83%BD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/ay31/blog/images/avatar.gif">
       <meta itemprop="name" content="york">
       <meta itemprop="description" content="">
     </span>
@@ -630,38 +563,37 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/08/23/Understanding%20ECMAScript%206/%E7%AC%AC%E5%8D%81%E7%AB%A0%20%E5%A2%9E%E5%BC%BA%E7%9A%84%E6%95%B0%E7%BB%84%E5%8A%9F%E8%83%BD/" class="post-title-link" itemprop="url">增强的数组功能</a>
+          
+            <a href="/2019/08/23/Understanding%20ECMAScript%206/%E7%AC%AC%E5%8D%81%E7%AB%A0%20%E5%A2%9E%E5%BC%BA%E7%9A%84%E6%95%B0%E7%BB%84%E5%8A%9F%E8%83%BD/" class="post-title-link" itemprop="url">增强的数组功能</a>
         </h2>
 
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2019-08-23 13:38:54" itemprop="dateCreated datePublished" datetime="2019-08-23T13:38:54+08:00">2019-08-23</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-14 16:04:01" itemprop="dateModified" datetime="2021-04-14T16:04:01+08:00">2021-04-14</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Understanding-ECMAScript-6/" itemprop="url" rel="index"><span itemprop="name">Understanding ECMAScript 6</span></a>
-        </span>
-    </span>
+              <time title="创建时间：2019-08-23 13:38:54" itemprop="dateCreated datePublished" datetime="2019-08-23T13:38:54+08:00">2019-08-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-14 16:04:01" itemprop="dateModified" datetime="2021-04-14T16:04:01+08:00">2021-04-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Understanding-ECMAScript-6/" itemprop="url" rel="index"><span itemprop="name">Understanding ECMAScript 6</span></a>
+                </span>
+            </span>
 
-  
-</div>
+          
 
         </div>
       </header>
@@ -670,6 +602,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>创建数组 数组上的新方法</p>
           <!--noindex-->
             <div class="post-button">
@@ -685,29 +619,22 @@
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
+      </footer>
   </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
+  
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://github.com/Ay31/blog/2019/08/22/Understanding%20ECMAScript%206/%E7%AC%AC%E4%B9%9D%E7%AB%A0%20JS%E7%9A%84%E7%B1%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/ay31/blog/images/avatar.gif">
       <meta itemprop="name" content="york">
       <meta itemprop="description" content="">
     </span>
@@ -717,38 +644,37 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/08/22/Understanding%20ECMAScript%206/%E7%AC%AC%E4%B9%9D%E7%AB%A0%20JS%E7%9A%84%E7%B1%BB/" class="post-title-link" itemprop="url">JS的类</a>
+          
+            <a href="/2019/08/22/Understanding%20ECMAScript%206/%E7%AC%AC%E4%B9%9D%E7%AB%A0%20JS%E7%9A%84%E7%B1%BB/" class="post-title-link" itemprop="url">JS的类</a>
         </h2>
 
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2019-08-22 20:38:54" itemprop="dateCreated datePublished" datetime="2019-08-22T20:38:54+08:00">2019-08-22</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-14 16:03:51" itemprop="dateModified" datetime="2021-04-14T16:03:51+08:00">2021-04-14</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Understanding-ECMAScript-6/" itemprop="url" rel="index"><span itemprop="name">Understanding ECMAScript 6</span></a>
-        </span>
-    </span>
+              <time title="创建时间：2019-08-22 20:38:54" itemprop="dateCreated datePublished" datetime="2019-08-22T20:38:54+08:00">2019-08-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-14 16:03:51" itemprop="dateModified" datetime="2021-04-14T16:03:51+08:00">2021-04-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Understanding-ECMAScript-6/" itemprop="url" rel="index"><span itemprop="name">Understanding ECMAScript 6</span></a>
+                </span>
+            </span>
 
-  
-</div>
+          
 
         </div>
       </header>
@@ -757,6 +683,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>ES5中的仿类解构 类的声明 类表达式 ...</p>
           <!--noindex-->
             <div class="post-button">
@@ -772,29 +700,22 @@
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
+      </footer>
   </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
+  
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://github.com/Ay31/blog/2019/08/22/Understanding%20ECMAScript%206/%E7%AC%AC%E5%85%AB%E7%AB%A0%20%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/ay31/blog/images/avatar.gif">
       <meta itemprop="name" content="york">
       <meta itemprop="description" content="">
     </span>
@@ -804,38 +725,37 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/08/22/Understanding%20ECMAScript%206/%E7%AC%AC%E5%85%AB%E7%AB%A0%20%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/" class="post-title-link" itemprop="url">迭代器与生成器</a>
+          
+            <a href="/2019/08/22/Understanding%20ECMAScript%206/%E7%AC%AC%E5%85%AB%E7%AB%A0%20%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/" class="post-title-link" itemprop="url">迭代器与生成器</a>
         </h2>
 
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2019-08-22 18:38:54" itemprop="dateCreated datePublished" datetime="2019-08-22T18:38:54+08:00">2019-08-22</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-14 16:03:43" itemprop="dateModified" datetime="2021-04-14T16:03:43+08:00">2021-04-14</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Understanding-ECMAScript-6/" itemprop="url" rel="index"><span itemprop="name">Understanding ECMAScript 6</span></a>
-        </span>
-    </span>
+              <time title="创建时间：2019-08-22 18:38:54" itemprop="dateCreated datePublished" datetime="2019-08-22T18:38:54+08:00">2019-08-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-14 16:03:43" itemprop="dateModified" datetime="2021-04-14T16:03:43+08:00">2021-04-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Understanding-ECMAScript-6/" itemprop="url" rel="index"><span itemprop="name">Understanding ECMAScript 6</span></a>
+                </span>
+            </span>
 
-  
-</div>
+          
 
         </div>
       </header>
@@ -844,6 +764,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>迭代器 生成器 访问默认迭代器 ...</p>
           <!--noindex-->
             <div class="post-button">
@@ -859,29 +781,22 @@
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
+      </footer>
   </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
+  
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://github.com/Ay31/blog/2019/08/22/Understanding%20ECMAScript%206/%E7%AC%AC%E4%B8%83%E7%AB%A0%20Set%E5%92%8CMap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/ay31/blog/images/avatar.gif">
       <meta itemprop="name" content="york">
       <meta itemprop="description" content="">
     </span>
@@ -891,38 +806,37 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/08/22/Understanding%20ECMAScript%206/%E7%AC%AC%E4%B8%83%E7%AB%A0%20Set%E5%92%8CMap/" class="post-title-link" itemprop="url">Set和Map</a>
+          
+            <a href="/2019/08/22/Understanding%20ECMAScript%206/%E7%AC%AC%E4%B8%83%E7%AB%A0%20Set%E5%92%8CMap/" class="post-title-link" itemprop="url">Set和Map</a>
         </h2>
 
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2019-08-22 13:38:54" itemprop="dateCreated datePublished" datetime="2019-08-22T13:38:54+08:00">2019-08-22</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-14 16:03:21" itemprop="dateModified" datetime="2021-04-14T16:03:21+08:00">2021-04-14</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Understanding-ECMAScript-6/" itemprop="url" rel="index"><span itemprop="name">Understanding ECMAScript 6</span></a>
-        </span>
-    </span>
+              <time title="创建时间：2019-08-22 13:38:54" itemprop="dateCreated datePublished" datetime="2019-08-22T13:38:54+08:00">2019-08-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-14 16:03:21" itemprop="dateModified" datetime="2021-04-14T16:03:21+08:00">2021-04-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Understanding-ECMAScript-6/" itemprop="url" rel="index"><span itemprop="name">Understanding ECMAScript 6</span></a>
+                </span>
+            </span>
 
-  
-</div>
+          
 
         </div>
       </header>
@@ -931,6 +845,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>ES5中的Set和Map ES6的Set ES6中的Map</p>
           <!--noindex-->
             <div class="post-button">
@@ -946,29 +862,22 @@
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
+      </footer>
   </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
+  
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://github.com/Ay31/blog/2019/08/22/Understanding%20ECMAScript%206/%E7%AC%AC%E5%85%AD%E7%AB%A0%20%E7%AC%A6%E5%8F%B7%E4%B8%8E%E7%AC%A6%E5%8F%B7%E5%B1%9E%E6%80%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/ay31/blog/images/avatar.gif">
       <meta itemprop="name" content="york">
       <meta itemprop="description" content="">
     </span>
@@ -978,38 +887,37 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/08/22/Understanding%20ECMAScript%206/%E7%AC%AC%E5%85%AD%E7%AB%A0%20%E7%AC%A6%E5%8F%B7%E4%B8%8E%E7%AC%A6%E5%8F%B7%E5%B1%9E%E6%80%A7/" class="post-title-link" itemprop="url">符号与符号属性</a>
+          
+            <a href="/2019/08/22/Understanding%20ECMAScript%206/%E7%AC%AC%E5%85%AD%E7%AB%A0%20%E7%AC%A6%E5%8F%B7%E4%B8%8E%E7%AC%A6%E5%8F%B7%E5%B1%9E%E6%80%A7/" class="post-title-link" itemprop="url">符号与符号属性</a>
         </h2>
 
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2019-08-22 11:38:54" itemprop="dateCreated datePublished" datetime="2019-08-22T11:38:54+08:00">2019-08-22</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-14 16:03:28" itemprop="dateModified" datetime="2021-04-14T16:03:28+08:00">2021-04-14</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Understanding-ECMAScript-6/" itemprop="url" rel="index"><span itemprop="name">Understanding ECMAScript 6</span></a>
-        </span>
-    </span>
+              <time title="创建时间：2019-08-22 11:38:54" itemprop="dateCreated datePublished" datetime="2019-08-22T11:38:54+08:00">2019-08-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-14 16:03:28" itemprop="dateModified" datetime="2021-04-14T16:03:28+08:00">2021-04-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Understanding-ECMAScript-6/" itemprop="url" rel="index"><span itemprop="name">Understanding ECMAScript 6</span></a>
+                </span>
+            </span>
 
-  
-</div>
+          
 
         </div>
       </header>
@@ -1018,6 +926,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>创建符号值 使用符号值 共享符号值</p>
           <!--noindex-->
             <div class="post-button">
@@ -1033,29 +943,119 @@
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
+      </footer>
   </article>
-</div>
+  
+  
+  
 
 
-
-
+  
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
-<script src="/js/comments.js"></script>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">york</p>
+  <div class="site-description" itemprop="description"></div>
 </div>
-  </main>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
 
-  <footer class="footer">
-    <div class="footer-inner">
 
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
 
 <div class="copyright">
+  
   &copy; 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
@@ -1063,15 +1063,39 @@
   </span>
   <span class="author" itemprop="copyrightHolder">york</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
-    </div>
-  </footer>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/ay31/blog/js/utils.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/ay31/blog/js/motion.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/ay31/blog/js/schemes/muse.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/ay31/blog/js/next-boot.js"></script>
+
+
+
 
   
 
@@ -1080,11 +1104,18 @@
 
 
 
+
+
+
+
+
+
+
+
+
   
 
-
-
-
+  
 
 </body>
 </html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;github.com&quot;,&quot;root&quot;:&quot;&#x2F;blog&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;blog&#x2F;images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.3.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta name="description" content="计算属性 侦听器 方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue基础">
+<meta property="og:url" content="https://github.com/Ay31/blog/2019/08/29/Vue%E5%85%A5%E9%97%A8/Vue%20%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="y31&#39;s blog">
+<meta property="og:description" content="计算属性 侦听器 方法">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-08-28T18:57:54.000Z">
+<meta property="article:modified_time" content="2021-04-14T03:43:00.405Z">
+<meta property="article:author" content="york">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://github.com/Ay31/blog/2019/08/29/Vue%E5%85%A5%E9%97%A8/Vue%20%E5%9F%BA%E7%A1%80/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;github.com&#x2F;Ay31&#x2F;blog&#x2F;2019&#x2F;08&#x2F;29&#x2F;Vue%E5%85%A5%E9%97%A8&#x2F;Vue%20%E5%9F%BA%E7%A1%80&#x2F;&quot;,&quot;path&quot;:&quot;2019&#x2F;08&#x2F;29&#x2F;Vue入门&#x2F;Vue 基础&#x2F;&quot;,&quot;title&quot;:&quot;Vue基础&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Vue基础 | y31's blog</title><script src="/blog/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">y31's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">Vue 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%EF%BC%8C%E4%BE%A6%E5%90%AC%E5%99%A8%EF%BC%8C%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">计算属性，侦听器，方法</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="york"
+      src="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+  <p class="site-author-name" itemprop="name">york</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="mailto:525998520@qq.com" title="E-Mail → mailto:525998520@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Ay31/blog/2019/08/29/Vue%E5%85%A5%E9%97%A8/Vue%20%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+      <meta itemprop="name" content="york">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="y31's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-08-29 02:57:54" itemprop="dateCreated datePublished" datetime="2019-08-29T02:57:54+08:00">2019-08-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-04-14 11:43:00" itemprop="dateModified" datetime="2021-04-14T11:43:00+08:00">2021-04-14</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/Vue%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">Vue入门</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">计算属性 侦听器 方法</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Vue-基础"><a href="#Vue-基础" class="headerlink" title="Vue 基础"></a>Vue 基础</h1><h2 id="计算属性，侦听器，方法"><a href="#计算属性，侦听器，方法" class="headerlink" title="计算属性，侦听器，方法"></a>计算属性，侦听器，方法</h2><p>方法在每次渲染时都会重新加载，而计算属性和侦听器都是在监听的属性发生变化时再开始执行，在计算属性和侦听器都可用的情况下，使用计算属性，因为代码量少。</p>
+<p>计算属性中，默认的return是get方法方法，但也可以手动添加set方法</p>
+<p>class和style的绑定，vue中使用v-bind绑定style和class时，不仅可以使用字符串，还可以使用数组和对象。</p>
+<p>class若绑定的是对象，则判断对象键值的true/flase（如果值是用data数据表示，若没有设置具体布尔值，默认存在则为true），绑定为数组时，则绑定的data数据键值的属性值，可绑定多个。</p>
+<p>style若绑定时对象，则类似css写法，键值（样式名），属性（数据），如果遇到类似font-size这种写法，需要用驼峰写法代替（fontSize），绑定数组则可以在数组中添加多个对象。</p>
+<p>v-if后可以跟v-if-else（v-if-else=“show===’b’”）和v-else（三者需要在连续行）。</p>
+<p>vue为提高性能，会复用标签，如果想标签独立需要加入不同的key值，key不推荐使用index，应该使用id。</p>
+<p>v-for列表渲染中，如果渲染的是数组则有（item，index），如果是对象则有（item，键值，数据）。</p>
+<p>如果想要修改数组，有三种方法，1是使用变异方法（push，pull，shift，unshift，reserve，sort，splice），2是替换数组（因为数组属于对象的一种，是引用类型），使用set方法（Vue.set/vm.$set），Vue.set（vm.xxxlist,索引，添加/替换内容）。</p>
+<p>修改对象则只有两种方法，一种是替换对象，一种是使用set方法，Vue.set（vm.xxxObject,键值，数据）。</p>
+<p>对于某些标签（table，ul，ol，select等），里面包含的标签是有要求的，如table后是tbody然后是tr，此时如果想用组件替代tr，可以使用<code>is</code>，<tr is="component"></tr>,</p>
+<p>子组件中，data必须是function，因为子组件可能被调用多次，每个子组件都应该有独立的data，而根实例只会被调用一次，所以可以是对象，function中return的属性实例的属性。</p>
+<p>vue中想要操控dom元素，需要给元素加入ref属性进行注册，在普通DOM元素中加入ref=”注册名”，引用的就是元素，this.$refs.xxx.innerHTML可以获取内容。在子组件中加入ref=”注册名”，引用的将是子组件的实例，所以可以获取里面的属性，this.$refs.xxx.number。</p>
+<p>vue中有单向数据流，即父组件可以向下传递数据，但子组件不能修改父组件的数据，所以子组件接收到父组件的数据后，可以在data中将其赋值给本组件定义的属性，然后使用自身的属性进行运算。</p>
+<p>子组件中，可以通过事件触发向父组件传递值。</p>
+<p>组件参数校验，在组件的props属性中，可以对传进的参数进行校验。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">props:[&quot;content&quot;,&quot;message&quot;]   &#x2F;&#x2F; 只接收</span><br><span class="line">props:&#123;</span><br><span class="line">	content:String,        &#x2F;&#x2F; 希望content是String类型</span><br><span class="line">	message:[String,Number]   &#x2F;&#x2F; mes可以是S或者N类型</span><br><span class="line">&#125;</span><br><span class="line">props:&#123;</span><br><span class="line">	content:[String,Number],  &#x2F;&#x2F;同上</span><br><span class="line">	message:&#123;</span><br><span class="line">		type:String,     &#x2F;&#x2F; 希望类型是S</span><br><span class="line">		require:false,     &#x2F;&#x2F;该参数是否是必须的</span><br><span class="line">		default:&#39;default value&#39;  &#x2F;&#x2F;，如果未传入参数，使用该默认值</span><br><span class="line">		validator:function(value)&#123;   &#x2F;&#x2F;对传入字符串长度进行校验</span><br><span class="line">			return (value.length &gt; 5)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>props特性指定义的属性，在组件中有对应的接收，反之则是非props特性，非props特性的属性值会显示在组件的dom上。</p>
+<p>在组件中，直接绑定原生事件（如click）会无效，会被视为是自定义事件，需要子组件绑定事件向外触发，如果想直接使用原生事件，可以添加<code>.native</code>，即 <code>@click.native=&quot;xxx&quot;</code></p>
+<p>非父子组件间传递值，使用bus/总线</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">        &lt;test content&#x3D;&quot;Apple&quot;&gt;&lt;&#x2F;test&gt;</span><br><span class="line">        &lt;test content&#x3D;&quot;Banana&quot;&gt;&lt;&#x2F;test&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        Vue.prototype.bus &#x3D; new Vue()</span><br><span class="line">        Vue.component(&quot;test&quot;, &#123;</span><br><span class="line">            props: [&#39;content&#39;],</span><br><span class="line">            template: &#39;&lt;div @click&#x3D;&quot;handleClick&quot;&gt;&#123;&#123;selfContent&#125;&#125;&lt;&#x2F;div&gt;&#39;,</span><br><span class="line">            data: function () &#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    selfContent: this.content</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            methods: &#123;</span><br><span class="line">                handleClick: function () &#123;</span><br><span class="line">                    this.bus.$emit(&#39;change&#39;, this.selfContent)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            mounted: function () &#123;</span><br><span class="line">                let this_ &#x3D; this;    &#x2F;&#x2F; 该this作用域是当前组件实例</span><br><span class="line">                this.bus.$on(&#39;change&#39;, function (mes) &#123;  &#x2F;&#x2F;此时的this是bus指向的Vue实例</span><br><span class="line">                    this_.selfContent &#x3D; mes;   </span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        var vm &#x3D; new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+
+<p>首先在Vue的原型上添加原型属性<code>bus</code>并且将它指向Vue的实例，在点击方法中，使用bus的vue实例中的$emit事件方法，触发事件并传递值，随后在mounted方法中，使用$on方法监听事件，事件触发后，执行函数。</p>
+<p>（个人理解：因为emit和on都是在同一个实例中，所以值可以在该实例中传递，随后再将值赋到组件中）</p>
+<p>插槽，在组件中想要插入dom元素必须使用插槽,否则元素会被忽略，插槽可以写入默认值，默认插槽（即组件中的dom元素没有slot属性）只有一个，可直接用<slot></solt>使用，具名插槽（dom元素中有slot=”name”属性）可以有多个，在template中<slot name="name"></slot>使用，template中只可以有一个根元素，所以需要使用一个外层div包裹。</p>
+<p>作用域插槽</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id&#x3D;&quot;root&quot;&gt;</span><br><span class="line">        &lt;body-content&gt;</span><br><span class="line">            &lt;template slot-scope&#x3D;&quot;&#123;scope&#125;&quot;&gt;</span><br><span class="line">                &lt;h1&gt;&#123;&#123;scope.user.name&#125;&#125;&lt;&#x2F;h1&gt;</span><br><span class="line">            &lt;&#x2F;template&gt;</span><br><span class="line">        &lt;&#x2F;body-content&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        Vue.component(&#39;body-content&#39;, &#123;</span><br><span class="line">            data: function () &#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    list: [1, 2, 4, 5],</span><br><span class="line">                    user: &#123;</span><br><span class="line">                        name: &#39;Tom&#39;,</span><br><span class="line">                        age: 18,</span><br><span class="line">                        sex: &#39;Female&#39;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            template: &#96;&lt;div&gt;</span><br><span class="line">                &lt;slot :user&#x3D;user&gt;&lt;&#x2F;slot&gt;</span><br><span class="line">                &lt;&#x2F;div&gt;&#96;</span><br><span class="line">        &#125;)</span><br><span class="line">        new Vue(&#123;</span><br><span class="line">            el: &quot;#root&quot;</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>让插槽内容可以访问到组件中的数据，模板中的slot需要有包裹，在slot中传递的属性，将在template中的slot-scope中被接收。</p>
+<p>在vue2.6中，slot-scope被废弃，使用<code>v-slot:default=“xxx”</code>取代，其中default指插槽名，如果只有默认插槽可以省略为v-slot（并且可以直接在组件名上使用）,但如果有多个（具名插槽）以上则必须用完整的语法（在template标签使用）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;template v-slot:default&#x3D;&quot;scope&quot;&gt;</span><br><span class="line">    &lt;h1&gt;&#123;&#123;scope.user.age&#125;&#125;&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>动态组件，组件可以根据is提供的组件名进行动态转换。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;component is&#x3D;&quot;组件名&quot;&gt;&lt;&#x2F;component&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>v-once,将内容存放在内存中，多次复用可提高效率</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/2019/08/26/Vue%E5%85%A5%E9%97%A8/Vue%E5%AE%9E%E4%BE%8B/" rel="prev" title="Vue实例">
+                  <i class="fa fa-chevron-left"></i> Vue实例
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/2019/08/30/Vue%E5%85%A5%E9%97%A8/Vue%20%E5%8A%A8%E7%94%BB/" rel="next" title="Vue动画">
+                  Vue动画 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/blog/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">york</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/schemes/muse.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

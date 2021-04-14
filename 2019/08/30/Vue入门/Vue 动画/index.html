@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;github.com&quot;,&quot;root&quot;:&quot;&#x2F;blog&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;blog&#x2F;images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.3.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta name="description" content="关键帧 动画钩子 ...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue动画">
+<meta property="og:url" content="https://github.com/Ay31/blog/2019/08/30/Vue%E5%85%A5%E9%97%A8/Vue%20%E5%8A%A8%E7%94%BB/index.html">
+<meta property="og:site_name" content="y31&#39;s blog">
+<meta property="og:description" content="关键帧 动画钩子 ...">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-08-30T09:38:54.000Z">
+<meta property="article:modified_time" content="2021-04-14T03:44:10.032Z">
+<meta property="article:author" content="york">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://github.com/Ay31/blog/2019/08/30/Vue%E5%85%A5%E9%97%A8/Vue%20%E5%8A%A8%E7%94%BB/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;github.com&#x2F;Ay31&#x2F;blog&#x2F;2019&#x2F;08&#x2F;30&#x2F;Vue%E5%85%A5%E9%97%A8&#x2F;Vue%20%E5%8A%A8%E7%94%BB&#x2F;&quot;,&quot;path&quot;:&quot;2019&#x2F;08&#x2F;30&#x2F;Vue入门&#x2F;Vue 动画&#x2F;&quot;,&quot;title&quot;:&quot;Vue动画&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Vue动画 | y31's blog</title><script src="/blog/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">y31's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-%E5%8A%A8%E7%94%BB"><span class="nav-number">1.</span> <span class="nav-text">Vue 动画</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="york"
+      src="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+  <p class="site-author-name" itemprop="name">york</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="mailto:525998520@qq.com" title="E-Mail → mailto:525998520@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Ay31/blog/2019/08/30/Vue%E5%85%A5%E9%97%A8/Vue%20%E5%8A%A8%E7%94%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+      <meta itemprop="name" content="york">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="y31's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue动画
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-08-30 17:38:54" itemprop="dateCreated datePublished" datetime="2019-08-30T17:38:54+08:00">2019-08-30</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-04-14 11:44:10" itemprop="dateModified" datetime="2021-04-14T11:44:10+08:00">2021-04-14</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/Vue%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">Vue入门</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">关键帧 动画钩子 ...</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Vue-动画"><a href="#Vue-动画" class="headerlink" title="Vue 动画"></a>Vue 动画</h1><p>单元素/组件的过渡，即条件渲染（v-if），条件展示（v-show）,动态组件，组件根节点。</p>
+<p>使用<transition name="fade"></transition>包裹，在css中通过类控制</p>
+<p>fade-enter进入前生效，进入后第一帧移除，fade-enter-to，进入第一帧后生效，动画完成后移除，fade-enter-active,进入前生效，动画完成后移除。</p>
+<p>fade-leave离开前生效，离开后第一帧移除，fade-leave-to,离开第一帧后生效，动画完成后移除，fade-leave-avtive，离开前生效，动画完成后移除。（删除是从有到无，离开前不能直接opacity0）</p>
+<p>没有name属性可直接用v-enter类名。</p>
+<p>css3 @keyframes 关键帧</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    <span class="keyword">@keyframes</span> test &#123;</span><br><span class="line">        <span class="selector-tag">from</span> &#123;                   //等同于<span class="number">0%</span></span><br><span class="line">            <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="number">50%</span> &#123;</span><br><span class="line">            <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">1.5</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="selector-tag">to</span> &#123;                        //等同于<span class="number">100%</span></span><br><span class="line">            <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.fade-enter-active</span> &#123;</span><br><span class="line">        <span class="attribute">transform-origin</span>: left center;</span><br><span class="line">        <span class="attribute">animation</span>: test <span class="number">1s</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.fade-leave-active</span> &#123;</span><br><span class="line">        <span class="attribute">transform-origin</span>: left center;</span><br><span class="line">        <span class="attribute">animation</span>: test <span class="number">1s</span> reverse;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>transition中的状态类名可以自定义<transition name="fade" enter-active-class = "animated swing"></transition>，因此可以通过这种办法使用css库</p>
+<p>如果想同时调用过渡效果和动画，可以在定义类名中添加原来的类名，再于css代码中加入过渡效果，如果想刷新第一次时就有动画效果（初始渲染），可以添加<code>appear</code>特性，动画时间和过渡时间冲突时，可以利用type选择优先类型，也可以使用<code>:duration</code>属性分别设置进入和离开的持续时间。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">transition</span> </span></span><br><span class="line"><span class="tag">        <span class="attr">name</span>=<span class="string">&quot;fade&quot;</span> </span></span><br><span class="line"><span class="tag">        <span class="attr">:duration</span>=<span class="string">&quot;&#123;enter:3000,leave:5000&#125;&quot;</span>   //<span class="attr">type</span>=<span class="string">&quot;transition&quot;</span>/&quot;<span class="attr">animation</span> &quot;</span></span><br><span class="line"><span class="tag">        <span class="attr">appear</span></span></span><br><span class="line"><span class="tag">        <span class="attr">enter-active-class</span>=<span class="string">&quot;animated swing fade-enter-active&quot;</span> </span></span><br><span class="line"><span class="tag">        <span class="attr">leave-active-class</span>=<span class="string">&quot;animated shake fade-leave-active&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">appear-active-class</span>=<span class="string">&quot;animated swing&quot;</span></span></span><br><span class="line"><span class="tag">        &gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">&quot;show&quot;</span>&gt;</span>Hello Vue!<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;handleClick&quot;</span>&gt;</span>click<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>使用js动画,使用钩子<code>@enter</code>之类，同理有<code>leave</code>对应的钩子</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">transition</span> </span></span><br><span class="line"><span class="tag">                @<span class="attr">before-enter</span>=<span class="string">&quot;handleBeforeEnter&quot;</span></span></span><br><span class="line"><span class="tag">                @<span class="attr">enter</span>=<span class="string">&quot;handleEnter&quot;</span> </span></span><br><span class="line"><span class="tag">                @<span class="attr">after-enter</span>=<span class="string">&quot;handleAfterEnter&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">&quot;show&quot;</span>&gt;</span>Hello Vue!<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;handleClick&quot;</span>&gt;</span>click<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">       new Vue(&#123;</span><br><span class="line">           el: &quot;#root&quot;,</span><br><span class="line">           data: &#123;</span><br><span class="line">               show: true</span><br><span class="line">           &#125;,</span><br><span class="line">           methods: &#123;</span><br><span class="line">               handleClick: function () &#123;</span><br><span class="line">                   this.show &#x3D; !this.show</span><br><span class="line">               &#125;,</span><br><span class="line">               handleBeforeEnter: function (el) &#123;</span><br><span class="line">                   el.style.color &#x3D; &quot;red&quot;;</span><br><span class="line">               &#125;,</span><br><span class="line">               handleEnter: function (el, done) &#123;</span><br><span class="line">                   setTimeout(() &#x3D;&gt; &#123;</span><br><span class="line">                       el.style.background &#x3D; &quot;green&quot;;</span><br><span class="line">                   &#125;, 2000)</span><br><span class="line">                   setTimeout(() &#x3D;&gt; &#123;</span><br><span class="line">                       done()</span><br><span class="line">                   &#125;, 4000)</span><br><span class="line">               &#125;,</span><br><span class="line">               handleAfterEnter: function (el) &#123;</span><br><span class="line">                   el.style.background &#x3D; &quot;black&quot;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;)</span><br><span class="line">   &lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>使用js动画库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">handleBeforeEnter: function (el) &#123;</span><br><span class="line">    el.style.opacity &#x3D; 0;</span><br><span class="line">&#125;,</span><br><span class="line">handleEnter: function (el, done) &#123;</span><br><span class="line">    Velocity(el,&#123;opacity:1&#125;,&#123;duration:1000, complete: done&#125;,)</span><br><span class="line">&#125;,</span><br><span class="line">handleAfterEnter: function (el) &#123;</span><br><span class="line">    el.style.background &#x3D; &quot;green&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>多元素过渡，div需要添加key值，否则vue会复用，mode控制进入和离开的先后顺序。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">transition</span> <span class="attr">mode</span>=<span class="string">&quot;out-in&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">&quot;show&quot;</span> <span class="attr">key</span>=<span class="string">&quot;hello&quot;</span>&gt;</span>Hello Vue!<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else</span> <span class="attr">key</span>=<span class="string">&quot;bye&quot;</span>&gt;</span>Bey Vue!<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>使用动态组件过渡</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">transition</span> <span class="attr">mode</span>=<span class="string">&quot;out-in&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">&quot;type&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;handleClick&quot;</span>&gt;</span>click<span class="tag">&lt;/<span class="name">button</span>&gt;</span>   //修改type值</span><br></pre></td></tr></table></figure>
+
+
+
+<p>给列表过渡,<transition-group>实际是给每一个<div>都添加了一层<transition>，所以加上css样式即可。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">transition-group</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;item of list&quot;</span><span class="attr">:key</span>=<span class="string">&quot;item.id&quot;</span>&gt;</span>&#123;&#123;item.text&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">transition-group</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>封装动画</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">fade</span> <span class="attr">:show</span>=<span class="string">&quot;show&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> &gt;</span></span><br><span class="line">        HEELO WORLD</span><br><span class="line">    <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">fade</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&#39;fade&#39;, &#123;</span><br><span class="line">    props: [&#39;show&#39;],</span><br><span class="line">    template: &#96;&lt;transition&gt;</span><br><span class="line">        &lt;slot v-if &#x3D; &quot;show&quot;&gt;&lt;&#x2F;slot&gt;</span><br><span class="line">        &lt;&#x2F;transition&gt;&#96;</span><br><span class="line">&#125;)        &#x2F;&#x2F;css代码另写</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&#39;fade&#39;, &#123;</span><br><span class="line">            props: [&#39;show&#39;],</span><br><span class="line">            template: &#96;&lt;transition @before-enter&#x3D;&quot;handleBeforeEnter&quot;</span><br><span class="line">                                    @enter&#x3D;&quot;handleEnter&quot;&gt;</span><br><span class="line">                &lt;slot v-if &#x3D; &quot;show&quot;&gt;&lt;&#x2F;slot&gt;</span><br><span class="line">                &lt;&#x2F;transition&gt;&#96;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                handleBeforeEnter: function(el)&#123;</span><br><span class="line">                    el.style.color &#x3D; &quot;red&quot;;</span><br><span class="line">                &#125;,</span><br><span class="line">                handleEnter: function(el)&#123;</span><br><span class="line">                    setTimeout(()&#x3D;&gt; </span><br><span class="line">                    el.style.color &#x3D; &quot;green&quot;</span><br><span class="line">                    ,2000)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)                 &#x2F;&#x2F;动画效果也封装入组件中</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/2019/08/29/Vue%E5%85%A5%E9%97%A8/Vue%20%E5%9F%BA%E7%A1%80/" rel="prev" title="Vue基础">
+                  <i class="fa fa-chevron-left"></i> Vue基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/2019/10/16/Vue%E5%85%A5%E9%97%A8/Vue%E5%85%A5%E9%97%A8/" rel="next" title="Vue入门">
+                  Vue入门 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/blog/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">york</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/schemes/muse.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

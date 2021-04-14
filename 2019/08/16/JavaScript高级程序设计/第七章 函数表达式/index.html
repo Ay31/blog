@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;github.com&quot;,&quot;root&quot;:&quot;&#x2F;blog&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;blog&#x2F;images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.3.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta name="description" content="函数表达式 闭包 模仿块级作用域...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数表达式">
+<meta property="og:url" content="https://github.com/Ay31/blog/2019/08/16/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
+<meta property="og:site_name" content="y31&#39;s blog">
+<meta property="og:description" content="函数表达式 闭包 模仿块级作用域...">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/1037093/201610/1037093-20161013162114437-1596732024.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/1037093/201610/1037093-20161013162224375-1696051186.png">
+<meta property="article:published_time" content="2019-08-16T08:45:54.000Z">
+<meta property="article:modified_time" content="2021-04-14T08:00:04.804Z">
+<meta property="article:author" content="york">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://images2015.cnblogs.com/blog/1037093/201610/1037093-20161013162114437-1596732024.png">
+
+
+<link rel="canonical" href="https://github.com/Ay31/blog/2019/08/16/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;github.com&#x2F;Ay31&#x2F;blog&#x2F;2019&#x2F;08&#x2F;16&#x2F;JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1&#x2F;%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F&#x2F;&quot;,&quot;path&quot;:&quot;2019&#x2F;08&#x2F;16&#x2F;JavaScript高级程序设计&#x2F;第七章 函数表达式&#x2F;&quot;,&quot;title&quot;:&quot;函数表达式&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>函数表达式 | y31's blog</title><script src="/blog/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">y31's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">第七章 函数表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">7.1 函数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-%E9%97%AD%E5%8C%85"><span class="nav-number">1.2.</span> <span class="nav-text">7.2 闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-1-%E9%97%AD%E5%8C%85%E4%B8%8E%E5%8F%98%E9%87%8F"><span class="nav-number">1.3.</span> <span class="nav-text">7.2.1 闭包与变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-2-this-%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.3.1.</span> <span class="nav-text">7.2.2 this 对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-3-%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="nav-number">1.3.2.</span> <span class="nav-text">7.2.3 内存泄漏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3-%E6%A8%A1%E4%BB%BF%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.4.</span> <span class="nav-text">7.3 模仿块级作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-4-%E7%A7%81%E6%9C%89%E5%8F%98%E9%87%8F"><span class="nav-number">1.5.</span> <span class="nav-text">7.4 私有变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-1-%E9%9D%99%E6%80%81%E7%A7%81%E6%9C%89%E5%8F%98%E9%87%8F"><span class="nav-number">1.5.1.</span> <span class="nav-text">7.4.1 静态私有变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-2-%E6%A8%A1%E5%9D%97%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.5.2.</span> <span class="nav-text">7.4.2 模块模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-3-%E5%A2%9E%E5%BC%BA%E7%9A%84%E6%A8%A1%E5%9D%97%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.5.3.</span> <span class="nav-text">7.4.3 增强的模块模式</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="york"
+      src="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+  <p class="site-author-name" itemprop="name">york</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="mailto:525998520@qq.com" title="E-Mail → mailto:525998520@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Ay31/blog/2019/08/16/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+      <meta itemprop="name" content="york">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="y31's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          函数表达式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-08-16 16:45:54" itemprop="dateCreated datePublished" datetime="2019-08-16T16:45:54+08:00">2019-08-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-04-14 16:00:04" itemprop="dateModified" datetime="2021-04-14T16:00:04+08:00">2021-04-14</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">JavaScript高级程序设计</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">函数表达式 闭包 模仿块级作用域...</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="第七章-函数表达式"><a href="#第七章-函数表达式" class="headerlink" title="第七章 函数表达式"></a>第七章 函数表达式</h1><h2 id="7-1-函数表达式"><a href="#7-1-函数表达式" class="headerlink" title="7.1 函数表达式"></a>7.1 函数表达式</h2><ul>
+<li><ol>
+<li><p>定义函数的方式有两种</p>
+</li>
+<li><ol>
+<li><p>函数声明 function functionName(){}</p>
+</li>
+<li><ol>
+<li>大部分浏览器支持 functionName.name 返回 functionName；</li>
+<li>函数声明提升，再执行代码前会先读取函数声明；</li>
+</ol>
+</li>
+<li><p>函数表达式 var functionName = function(){};</p>
+</li>
+<li><ol>
+<li>创建一个函数赋值给变量，该函数称为匿名函数，function 后面没有标识符；</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>调用匿名函数时，需要加上（），如 functionName（），匿名函数最后直接加入（）则可以自动执行，（）中可以填入参数，调用函数内部返回的匿名函数，则或许要 functionName（）（）// 两个括号；</li>
+<li>递归 调用函数自身</li>
+</ol>
+</li>
+</ul>
+<h2 id="7-2-闭包"><a href="#7-2-闭包" class="headerlink" title="7.2 闭包"></a>7.2 闭包</h2><ul>
+<li><ol>
+<li><p>匿名函数是指没有标识符的函数，闭包是指有权访问到外部变量（另一个作用域中的变量）的<strong>函数</strong>；</p>
+</li>
+<li></li>
+<li><ol>
+<li>当某个函数被调用时，会创建一个执行环境及对应的作用域链；</li>
+<li>然后，使用 arguments 和其它命名参数来初始化函数的活动对象；</li>
+<li>在作用域链中，外部函数的活动对象始终处于第二位，第三位于以此类推，终点位全局执行环境；</li>
+</ol>
+</li>
+<li><p>闭包会占用更多的内存，建议只在绝对必要时使用；</p>
+<p> <img src="https://images2015.cnblogs.com/blog/1037093/201610/1037093-20161013162114437-1596732024.png" alt="avatar"></p>
+</li>
+</ol>
+</li>
+</ul>
+<p>过程</p>
+<ol>
+<li><p>创建 compare（）函数时，先创建预先包含全局变量对象的作用域链，这个作用域链保存在内部的[[scope]]属性中；</p>
+</li>
+<li><p>调用 compare（）函数时，会创建一个执行环境，复制函数[[scope]]属性中的作用域链；</p>
+</li>
+<li><p>此后，又有一个活动对象（自身变量对象）被推入作用域链的前端；</p>
+</li>
+<li><p>作用域链本身是指向变量对象的指针列表，只引用不实际包含；</p>
+</li>
+<li><p>访问函数中的变量时，就会从作用域链中搜索，一般函数执行完毕后，局部活动对象会被销毁，内存仅保留全局作用域（全局执行环境的变量对象）；</p>
+</li>
+</ol>
+<p><img src="https://images2015.cnblogs.com/blog/1037093/201610/1037093-20161013162224375-1696051186.png" alt="avatar"></p>
+<p>过程</p>
+<ol>
+<li>在一个函数内部定义的函数，会将它的外部函数的活动对象添加到作用域链中；</li>
+<li>当外部函数执行完后，它的作用域链会被销毁，但它的活动对象并不会被销毁，因为匿名函数的作用域链仍然在引用这个活动对象，所以该活动对象仍然会留在内存中，直到匿名函数被销毁（匿名函数=null）；</li>
+</ol>
+<h2 id="7-2-1-闭包与变量"><a href="#7-2-1-闭包与变量" class="headerlink" title="7.2.1 闭包与变量"></a>7.2.1 闭包与变量</h2><ul>
+<li><ol>
+<li>闭包只能取得外部函数中任何变量的最后一个值；</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createFunctions</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = <span class="keyword">new</span> <span class="built_in">Array</span>()</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        result[i] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> funcs = createFunctions()</span><br><span class="line"><span class="comment">//every function outputs 10</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; funcs.length; i++) &#123;</span><br><span class="line">    <span class="built_in">document</span>.write(funcs[i]() + <span class="string">&#x27;&lt;br /&gt;&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该例子中，最后取得数组值都是 10，最后执行时，此时的 i 已经累加到 10，引用的是同一个 i；</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createFunctions</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = <span class="keyword">new</span> <span class="built_in">Array</span>()</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        result[i] = (<span class="function"><span class="keyword">function</span> (<span class="params">num</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> num</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)(i)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> funcs = createFunctions()</span><br><span class="line"><span class="comment">//every function outputs 10</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; funcs.length; i++) &#123;</span><br><span class="line">    <span class="built_in">document</span>.write(funcs[i]() + <span class="string">&#x27;&lt;br /&gt;&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该例子中，因为循环时，最后传入了参数 i（num），并且传入参数属于值传递，所以每一个的值的副本都不相同，最后数组值也均不相同；</p>
+<h3 id="7-2-2-this-对象"><a href="#7-2-2-this-对象" class="headerlink" title="7.2.2 this 对象"></a>7.2.2 this 对象</h3><ul>
+<li><ol>
+<li>闭包中使用 this 可能会导致某些问题，如匿名函数的执行环境具有全局性，当它在全局环境下执行时，this=window</li>
+<li>防止该情况可以在外部函数中将外部函数的 this 赋值给某个变量，然后在匿名函数中使用该变量；</li>
+</ol>
+</li>
+<li><p>  e.g var that = this ； return that.name；</p>
+</li>
+</ul>
+<h3 id="7-2-3-内存泄漏"><a href="#7-2-3-内存泄漏" class="headerlink" title="7.2.3 内存泄漏"></a>7.2.3 内存泄漏</h3><h2 id="7-3-模仿块级作用域"><a href="#7-3-模仿块级作用域" class="headerlink" title="7.3 模仿块级作用域"></a>7.3 模仿块级作用域</h2><ul>
+<li><ol>
+<li>js 中没有块级作用域（for 之类），但函数是有作用域的，可以模仿块级作用域。</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="comment">//作用域</span></span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure>
+
+<p>这样写会报错，因为 js 将 function 关键字当作函数声明的开始，而函数声明后不能跟圆括号，而函数表达式可以，所以要将其转换为函数表达式；</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">;(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//作用域</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-4-私有变量"><a href="#7-4-私有变量" class="headerlink" title="7.4 私有变量"></a>7.4 私有变量</h2><ul>
+<li><ol>
+<li><p>严格而言，js 没有私有变量，所有对象属性都是共有的，但函数中定义的变量，可以认为是私有变量，因为外部不能访问；</p>
+</li>
+<li><p>有权访问私有变量和私有函数的共有方法称作<strong>特权方法</strong></p>
+</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">this</span>.setName = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        name = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">&#x27;Nicholas&#x27;</span>)</span><br><span class="line">alert(person.getName()) <span class="comment">//&quot;Nicholas&quot;</span></span><br><span class="line">person.setName(<span class="string">&#x27;Greg&#x27;</span>)</span><br><span class="line">alert(person.getName()) <span class="comment">//&quot;Greg&quot;</span></span><br></pre></td></tr></table></figure>
+
+<pre><code> 通过构造函数中定义特权方法
+
+ getName（）和setName（）是特权方法（闭包）可以访问外部变量（name），这样的设置可以避免数据被直接修改，只有通过特权方法才能更改私有变量；
+
+ 与其它构造函数模式相同，每一次生成新的实例时，都会重新创建这两个方法，而且必须通过构造函数模式来使用；
+</code></pre>
+<h3 id="7-4-1-静态私有变量"><a href="#7-4-1-静态私有变量" class="headerlink" title="7.4.1 静态私有变量"></a>7.4.1 静态私有变量</h3><ul>
+<li><ol>
+<li>通过在私有作用域中定义私有变量或函数，也可以创建特权方法；</li>
+<li>通过原型定义公有（特权）方法；</li>
+<li>私有作用域中的构造函数，并没有使用函数声明（函数声明只能创建局部函数），为了创建全局的构造函数，函数表达式中也没有使用 var；</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">;(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    Person = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        name = value</span><br><span class="line">    &#125;</span><br><span class="line">    Person.prototype.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name</span><br><span class="line">    &#125;</span><br><span class="line">    Person.prototype.setName = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        name = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br><span class="line"><span class="keyword">var</span> person1 = <span class="keyword">new</span> Person(<span class="string">&#x27;Nicholas&#x27;</span>)</span><br><span class="line">alert(person1.getName()) <span class="comment">//&quot;Nicholas&quot;</span></span><br><span class="line">person1.setName(<span class="string">&#x27;Greg&#x27;</span>)</span><br><span class="line">alert(person1.getName()) <span class="comment">//&quot;Greg&quot;</span></span><br><span class="line"><span class="keyword">var</span> person2 = <span class="keyword">new</span> Person(<span class="string">&#x27;Michael&#x27;</span>)</span><br><span class="line">alert(person1.getName()) <span class="comment">//&quot;Michael&quot;</span></span><br><span class="line">alert(person2.getName()) <span class="comment">//&quot;Michael&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>和原型模式一样，一个实例上调用 setName（）会影响所有实例；</p>
+<h3 id="7-4-2-模块模式"><a href="#7-4-2-模块模式" class="headerlink" title="7.4.2 模块模式"></a>7.4.2 模块模式</h3><ul>
+<li><ol>
+<li><p>模块模式用于为单例创建私有变量的特权方法，单例指的是只有一个实例的对象；</p>
+</li>
+<li><p>匿名函数返回了一个字面量对象；</p>
+</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">BaseComponent</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">OtherComponent</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> application = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//private variables and functions</span></span><br><span class="line">    <span class="keyword">var</span> components = <span class="keyword">new</span> <span class="built_in">Array</span>()</span><br><span class="line">    <span class="comment">//initialization</span></span><br><span class="line">    components.push(<span class="keyword">new</span> BaseComponent())</span><br><span class="line">    <span class="comment">//public interface</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        getComponentCount: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> components.length</span><br><span class="line">        &#125;,</span><br><span class="line">        registerComponent: <span class="function"><span class="keyword">function</span> (<span class="params">component</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">typeof</span> component == <span class="string">&#x27;object&#x27;</span>) &#123;</span><br><span class="line">                components.push(component)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br><span class="line">application.registerComponent(<span class="keyword">new</span> OtherComponent())</span><br><span class="line">alert(application.getComponentCount()) <span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-4-3-增强的模块模式"><a href="#7-4-3-增强的模块模式" class="headerlink" title="7.4.3 增强的模块模式"></a>7.4.3 增强的模块模式</h3><ul>
+<li><ol>
+<li>返回了 BaseComponet 的实例对象，对于某些要求单例必须是某种类型的实例需求有用；</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">BaseComponent</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">OtherComponent</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> application = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//private variables and functions</span></span><br><span class="line">    <span class="keyword">var</span> components = <span class="keyword">new</span> <span class="built_in">Array</span>()</span><br><span class="line">    <span class="comment">//initialization</span></span><br><span class="line">    components.push(<span class="keyword">new</span> BaseComponent())</span><br><span class="line">    <span class="comment">//create a local copy of application</span></span><br><span class="line">    <span class="keyword">var</span> app = <span class="keyword">new</span> BaseComponent()</span><br><span class="line">    <span class="comment">//public interface</span></span><br><span class="line">    app.getComponentCount = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> components.length</span><br><span class="line">    &#125;</span><br><span class="line">    app.registerComponent = <span class="function"><span class="keyword">function</span> (<span class="params">component</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> component == <span class="string">&#x27;object&#x27;</span>) &#123;</span><br><span class="line">            components.push(component)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//return it</span></span><br><span class="line">    <span class="keyword">return</span> app</span><br><span class="line">&#125;)()</span><br><span class="line">alert(application <span class="keyword">instanceof</span> BaseComponent)</span><br><span class="line">application.registerComponent(<span class="keyword">new</span> OtherComponent())</span><br><span class="line">alert(application.getComponentCount()) <span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/2019/08/15/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" rel="prev" title="面向对象的程序设计">
+                  <i class="fa fa-chevron-left"></i> 面向对象的程序设计
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/2019/08/21/Understanding%20ECMAScript%206/%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E5%9D%97%E7%BA%A7%E7%BB%91%E5%AE%9A/" rel="next" title="块级绑定">
+                  块级绑定 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/blog/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">york</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/schemes/muse.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

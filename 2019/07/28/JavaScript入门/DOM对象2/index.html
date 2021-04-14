@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;github.com&quot;,&quot;root&quot;:&quot;&#x2F;blog&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;blog&#x2F;images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.3.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta name="description" content="获取dom 节点 ...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DOM对象2">
+<meta property="og:url" content="https://github.com/Ay31/blog/2019/07/28/JavaScript%E5%85%A5%E9%97%A8/DOM%E5%AF%B9%E8%B1%A12/index.html">
+<meta property="og:site_name" content="y31&#39;s blog">
+<meta property="og:description" content="获取dom 节点 ...">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/ay31/image/raw/master/image/5405263300018bcf05760129.jpg">
+<meta property="article:published_time" content="2019-07-28T15:46:54.000Z">
+<meta property="article:modified_time" content="2021-04-14T07:25:46.808Z">
+<meta property="article:author" content="york">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/ay31/image/raw/master/image/5405263300018bcf05760129.jpg">
+
+
+<link rel="canonical" href="https://github.com/Ay31/blog/2019/07/28/JavaScript%E5%85%A5%E9%97%A8/DOM%E5%AF%B9%E8%B1%A12/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;github.com&#x2F;Ay31&#x2F;blog&#x2F;2019&#x2F;07&#x2F;28&#x2F;JavaScript%E5%85%A5%E9%97%A8&#x2F;DOM%E5%AF%B9%E8%B1%A12&#x2F;&quot;,&quot;path&quot;:&quot;2019&#x2F;07&#x2F;28&#x2F;JavaScript入门&#x2F;DOM对象2&#x2F;&quot;,&quot;title&quot;:&quot;DOM对象2&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>DOM对象2 | y31's blog</title><script src="/blog/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">y31's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM-%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">DOM 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-dom"><span class="nav-number">1.1.</span> <span class="nav-text">获取 dom</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8A%82%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">节点</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="york"
+      src="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+  <p class="site-author-name" itemprop="name">york</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="mailto:525998520@qq.com" title="E-Mail → mailto:525998520@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Ay31/blog/2019/07/28/JavaScript%E5%85%A5%E9%97%A8/DOM%E5%AF%B9%E8%B1%A12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+      <meta itemprop="name" content="york">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="y31's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DOM对象2
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-07-28 23:46:54" itemprop="dateCreated datePublished" datetime="2019-07-28T23:46:54+08:00">2019-07-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-04-14 15:25:46" itemprop="dateModified" datetime="2021-04-14T15:25:46+08:00">2021-04-14</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/JavaScript%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">JavaScript入门</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">获取dom 节点 ...</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="DOM-对象"><a href="#DOM-对象" class="headerlink" title="DOM 对象"></a>DOM 对象</h1><p><img src="https://gitee.com/ay31/image/raw/master/image/5405263300018bcf05760129.jpg"></p>
+<h2 id="获取-dom"><a href="#获取-dom" class="headerlink" title="获取 dom"></a>获取 dom</h2><ol>
+<li>getElementsByName()方法 返回带有指定名称的节点对象的集合 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="built_in">document</span>.getElementsByName(<span class="string">&#x27;haha&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> li = i[<span class="number">0</span>]</span><br><span class="line">alert(li.innerHTML)</span><br><span class="line">alert(i[<span class="number">5</span>].innerHTML)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>因为 name 属性可能不唯一，返回的是元素的数组，而不是一个元素。</li>
+<li>与数组类似，也有 length 属性。</li>
+</ol>
+</li>
+<li>getElementsByTagName()方法 返回带有指定标签名结点的集合 数组<ol>
+<li>TagName 是标签的名字,如 p，input 等；</li>
+<li>与数组类似，有 length 属性，从 0 开始；</li>
+</ol>
+</li>
+<li>区别<ol>
+<li>ID 是一个人的身份证号码，是唯一的。所以通过 getElementById 获取的是指定的一个人。</li>
+<li>Name 是他的名字，可以重复。所以通过 getElementsByName 获取名字相同的人集合。</li>
+<li>TagName 可看似某类，getElementsByTagName 获取相同类的人集合。如获取小孩这类人，getElementsByTagName(“小孩”)。</li>
+</ol>
+</li>
+<li>getAttribut(“name”)方法 通过元素节点的属性名称获取属性的值<ol>
+<li>elementNode.getAttribute(”name“)； 使用 getElementById()、getElementsByTagName()等方法，获取到的元素节点；</li>
+<li>name 想要查询属性的名字；</li>
+</ol>
+</li>
+<li>setAttribute()方法<ol>
+<li>elementNode.setAttribute(name,value) 增加一个指定名称和值的新属性</li>
+<li>name 要设置的属性名，value 要设置的属性值。</li>
+<li>如果不存在指定名称的属性将会创建一个新属性，类似于 getAttribute 方法，只能通过元素节点调用函数。</li>
+</ol>
+</li>
+</ol>
+<h2 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h2><ol>
+<li>节点属性<ol>
+<li>nodeName：节点的名称 只读<ol>
+<li>元素节点的 nodeName 与标签名相同</li>
+<li>属性节点的 nodeName 是属性的名称</li>
+<li>文本节点的 nodeName 永远是#text</li>
+<li>文档节点的 nodeName 永远是#document</li>
+</ol>
+</li>
+<li>nodeValue：节点的值<ol>
+<li>元素节点的 nodeValue 是 undefined 或 null</li>
+<li>文本节点的 nodeValue 是文本自身</li>
+<li>属性节点的 nodeValue 是属性的值</li>
+</ol>
+</li>
+<li>nodeType：节点的类型 只读<ol>
+<li>元素 1</li>
+<li>属性 2</li>
+<li>文本 3</li>
+<li>注释 8</li>
+<li>文档 9</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>访问子节点 elementNode.childNodes 返回数组 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// parg 是一个到 &lt;p&gt; 元素的引用</span></span><br><span class="line"><span class="keyword">var</span> children = parg.childNodes</span><br></pre></td></tr></table></figure>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 因为 ByTagName 返回的也是数组;</span></span><br><span class="line"><span class="keyword">var</span> i = <span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;div&#x27;</span>)[<span class="number">0</span>].childNodes</span><br></pre></td></tr></table></figure></li>
+<li>访问子节点的第一和最后项<ol>
+<li>node.firstchild 如果没有子节点则返回 NULL</li>
+<li>node.lastchild 如果没有子节点则返回 NULL</li>
+</ol>
+</li>
+<li>访问父节点<ol>
+<li>elementNode.parentNode</li>
+<li>elementNode.parentNode.parentNode 祖节点</li>
+</ol>
+</li>
+<li>访问兄弟节点<ol>
+<li>nodeObject.nextSibling 返回下一个节点</li>
+<li>nodeObject.previousSbling 返回上一个节点</li>
+</ol>
+</li>
+<li>插入节点 后 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> otest = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> newnode = <span class="built_in">document</span>.createElement(<span class="string">&#x27;li&#x27;</span>)</span><br><span class="line">newnode.innerHTML = <span class="string">&#x27;php&#x27;</span></span><br><span class="line">otest.appendChild(newnode)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>xxxx.appendChild(newnode); 在指定节点(xxx)添加最后一个子节点</li>
+<li>如果被插入的节点已经存在于当前文档的文档树中,则那个节点会首先从原先的位置移除,然后再插入到新的位置.</li>
+</ol>
+</li>
+<li>插入节点 前 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> otest = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> node = <span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;li&#x27;</span>)[<span class="number">1</span>]</span><br><span class="line"><span class="keyword">var</span> newnode = <span class="built_in">document</span>.createElement(<span class="string">&#x27;li&#x27;</span>)</span><br><span class="line">newnode.innerHTML = <span class="string">&#x27;php&#x27;</span></span><br><span class="line">otest.insertBefore(newnode, node)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>insertBefore(newnode,node) newnode 要插入的新节点，node 在此节点前插入。</li>
+<li>otest.insertBefore(newnode,node); otest 父节点。</li>
+</ol>
+</li>
+<li>删除节点<ol>
+<li>nodeObject.removeChild(node); nodeObject 父节点 node 子节点中要删除的节点</li>
+<li>var a = nodeObject.removeChild(node); 删除的节点可以赋值给 x ，这个字节点不在 dom 树中，但是还存在内存中，可通过 x 操作，若要完全删除， a = null ;</li>
+</ol>
+</li>
+<li>替换元素节点 返回被替换对象的引用<ol>
+<li>node.replaceChild(newnode,oldnode); node 父节点 n 用于替换的对象 o 被替换的对象</li>
+<li>当 oldnode 被替换时，所有与之相关的属性内容都将被移除。newnode 必须先被建立。</li>
+</ol>
+</li>
+<li>创建元素节点<ol>
+<li>createElement(tagName)</li>
+<li>var a = document.createElement(“input”); a.value=”button” 也可通过 setAttribute 设置</li>
+</ol>
+</li>
+<li>创建文本节点<ol>
+<li>var I = document.createTextNode(data) data 内容</li>
+<li>var a = document.createElement(“p”);<ol>
+<li>appendChild(i); // 在 a 中加入 i 的内容 即 &lt;p&gt;data&lt;/p&gt;</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/2019/07/28/JavaScript%E5%85%A5%E9%97%A8/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AF%B9%E8%B1%A1/" rel="prev" title="浏览器对象">
+                  <i class="fa fa-chevron-left"></i> 浏览器对象
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/2019/07/28/JavaScript%E5%85%A5%E9%97%A8/DOM%E5%AF%B9%E8%B1%A11/" rel="next" title="DOM对象1">
+                  DOM对象1 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/blog/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">york</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/schemes/muse.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

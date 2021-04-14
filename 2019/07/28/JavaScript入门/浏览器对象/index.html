@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;github.com&quot;,&quot;root&quot;:&quot;&#x2F;blog&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;blog&#x2F;images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.3.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta name="description" content="JavaScript计时器 History对象 Location对象 ...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器对象">
+<meta property="og:url" content="https://github.com/Ay31/blog/2019/07/28/JavaScript%E5%85%A5%E9%97%A8/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:site_name" content="y31&#39;s blog">
+<meta property="og:description" content="JavaScript计时器 History对象 Location对象 ...">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/ay31/image/raw/master/image/javascript-time.jpg">
+<meta property="og:image" content="https://gitee.com/ay31/image/raw/master/image/53605c5a0001b26909900216.jpg">
+<meta property="og:image" content="https://gitee.com/ay31/image/raw/master/image/5354b1d00001c4ec06220271.jpg">
+<meta property="og:image" content="https://gitee.com/ay31/image/raw/master/image/5354b1eb00016a2405170126.jpg">
+<meta property="og:image" content="https://gitee.com/ay31/image/raw/master/image/5354cff70001428b06880190.jpg">
+<meta property="og:image" content="https://gitee.com/ay31/image/raw/master/image/5354d2810001a47706210213.jpg">
+<meta property="article:published_time" content="2019-07-28T08:39:54.000Z">
+<meta property="article:modified_time" content="2021-04-14T07:34:00.542Z">
+<meta property="article:author" content="york">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/ay31/image/raw/master/image/javascript-time.jpg">
+
+
+<link rel="canonical" href="https://github.com/Ay31/blog/2019/07/28/JavaScript%E5%85%A5%E9%97%A8/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AF%B9%E8%B1%A1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;github.com&#x2F;Ay31&#x2F;blog&#x2F;2019&#x2F;07&#x2F;28&#x2F;JavaScript%E5%85%A5%E9%97%A8&#x2F;%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AF%B9%E8%B1%A1&#x2F;&quot;,&quot;path&quot;:&quot;2019&#x2F;07&#x2F;28&#x2F;JavaScript入门&#x2F;浏览器对象&#x2F;&quot;,&quot;title&quot;:&quot;浏览器对象&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>浏览器对象 | y31's blog</title><script src="/blog/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">y31's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript-%E8%AE%A1%E6%97%B6%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">JavaScript 计时器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#History-%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text">History 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Location-%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">Location 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Navigator-%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.</span> <span class="nav-text">Navigator 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#screen-%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.</span> <span class="nav-text">screen 对象</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="york"
+      src="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+  <p class="site-author-name" itemprop="name">york</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="mailto:525998520@qq.com" title="E-Mail → mailto:525998520@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Ay31/blog/2019/07/28/JavaScript%E5%85%A5%E9%97%A8/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AF%B9%E8%B1%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+      <meta itemprop="name" content="york">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="y31's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          浏览器对象
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-07-28 16:39:54" itemprop="dateCreated datePublished" datetime="2019-07-28T16:39:54+08:00">2019-07-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-04-14 15:34:00" itemprop="dateModified" datetime="2021-04-14T15:34:00+08:00">2021-04-14</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/JavaScript%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">JavaScript入门</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">JavaScript计时器 History对象 Location对象 ...</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="JavaScript-计时器"><a href="#JavaScript-计时器" class="headerlink" title="JavaScript 计时器"></a>JavaScript 计时器</h2><p>(我也看不懂当初写的什么意思了 😮)</p>
+<ol>
+<li>计时器 setInterval(代码,交互时间)<br>假设有一个 clock()函数 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(clock, <span class="number">1000</span>)</span><br></pre></td></tr></table></figure></li>
+<li>取消计时器 clearInterval(“id”); <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i =<span class="built_in">setInterval</span>(clock,<span class="number">100</span>);</span><br><span class="line">&lt;input type=<span class="string">&quot;button&quot;</span> onclick=<span class="string">&quot;clearInterval(i)&quot;</span>;</span><br></pre></td></tr></table></figure></li>
+<li>延时计时器 setTimeout(代码,延迟时间) <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="string">&quot;alert(&quot;</span>hahha<span class="string">&quot;)&quot;</span>,<span class="number">3000</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a1</span>(<span class="params"></span>)</span>&#123;<span class="built_in">setTimeout</span>(a1,<span class="number">3000</span>);&#125; <span class="built_in">setTimeout</span>(a1,<span class="number">1000</span>); 递归</span><br></pre></td></tr></table></figure></li>
+<li>取消计时器 clearTimeout(); <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">stopCount</span>(<span class="params"></span>)</span>&#123;<span class="built_in">clearTimeout</span>(i);&#125; onclick = <span class="string">&quot;stopCount()&quot;</span>;</span><br><span class="line">onclick = “<span class="built_in">clearTimeout</span>(i)”;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><img src="https://gitee.com/ay31/image/raw/master/image/javascript-time.jpg"></p>
+<h2 id="History-对象"><a href="#History-对象" class="headerlink" title="History 对象"></a>History 对象</h2><ol>
+<li>从窗口被打开的那一刻开始记录，每个浏览器窗口、每个标签页乃至每个框架，都有自己的 history 对象与特的 window 对象关联。</li>
+<li>返回前一个浏览的页面<ol>
+<li>window.history.back();</li>
+<li>window.history.go(-1);</li>
+</ol>
+</li>
+<li>返回下一个浏览的页面<ol>
+<li>window.history.forward();</li>
+<li>windwo.history.go(1);</li>
+</ol>
+</li>
+<li>返回浏览历史中的其他页面<ol>
+<li>window.history.go(0) 当前页面</li>
+<li>windwo.history.go(-2) 之前浏览的第二个页面 ＝ 按了两次后退</li>
+<li>window.history.go(3) 返回当前页面之后浏览过的第三个页面</li>
+</ol>
+</li>
+</ol>
+<h2 id="Location-对象"><a href="#Location-对象" class="headerlink" title="Location 对象"></a>Location 对象</h2><p>location 用于获取或设置窗体的 URL，并且可以用于解析 URL。</p>
+<p><img src="https://gitee.com/ay31/image/raw/master/image/53605c5a0001b26909900216.jpg"></p>
+<p><img src="https://gitee.com/ay31/image/raw/master/image/5354b1d00001c4ec06220271.jpg"></p>
+<p><img src="https://gitee.com/ay31/image/raw/master/image/5354b1eb00016a2405170126.jpg"></p>
+<ol>
+<li><p>window.location.assign(url) ：<br>加载 URL 指定的新的 HTML 文档。 就相当于一个链接，跳转到指定的 url，当前页面会转为新页面内容，可击后退返回上一个页面。</p>
+</li>
+<li><p>window.location.replace(url) ：<br>通过加载 URL 指定的文档来替换当前文档 ，这个方法是替换当前窗口页面，前后两个页面共用一个</p>
+</li>
+</ol>
+<h2 id="Navigator-对象"><a href="#Navigator-对象" class="headerlink" title="Navigator 对象"></a>Navigator 对象</h2><p><img src="https://gitee.com/ay31/image/raw/master/image/5354cff70001428b06880190.jpg"></p>
+<ol>
+<li><p>Navigator 对象包含有关浏览器的信息，通常用于检测浏览器与操作系统的版本。</p>
+<ol>
+<li>document.write(navigator.appName);</li>
+</ol>
+</li>
+<li><p>userAgent 返回用户代理头的字符串表示(就是包括浏览器版本信息等的字符串)</p>
+</li>
+</ol>
+<h2 id="screen-对象"><a href="#screen-对象" class="headerlink" title="screen 对象"></a>screen 对象</h2><p><img src="https://gitee.com/ay31/image/raw/master/image/5354d2810001a47706210213.jpg"></p>
+<ol>
+<li>screen 对象用于获取用户的屏幕信息。</li>
+<li>屏幕分辨率的高和宽 (单位:px)<ol>
+<li>screen.width;</li>
+<li>screen.height;</li>
+</ol>
+</li>
+<li>屏幕可用的高和宽度 减去界面特性，比如任务栏。<ol>
+<li>screen.availWidth</li>
+<li>screen.avail.Height</li>
+</ol>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/2019/07/27/JavaScript%E5%85%A5%E9%97%A8/JavaScript%E5%AF%B9%E8%B1%A1/" rel="prev" title="JavaScript对象">
+                  <i class="fa fa-chevron-left"></i> JavaScript对象
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/2019/07/28/JavaScript%E5%85%A5%E9%97%A8/DOM%E5%AF%B9%E8%B1%A12/" rel="next" title="DOM对象2">
+                  DOM对象2 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/blog/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">york</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/schemes/muse.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

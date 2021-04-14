@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;github.com&quot;,&quot;root&quot;:&quot;&#x2F;blog&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;blog&#x2F;images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.3.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta name="description" content="Scanner Parser 预解析 ...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="V8引擎是如何工作的">
+<meta property="og:url" content="https://github.com/Ay31/blog/2020/12/24/JavaScript%E8%BF%9B%E9%98%B6/%E5%87%BD%E6%95%B0/1.V8%E5%BC%95%E6%93%8E%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/index.html">
+<meta property="og:site_name" content="y31&#39;s blog">
+<meta property="og:description" content="Scanner Parser 预解析 ...">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2020/e0cf9f3b0419b99e8b8b51e499dda7dd.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2020/1e5c57c8c0d89b6da647f60034ca746c.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2020/f8070c8e4e6626ecdb54b35d2c3b4289.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2020/ba77812fd31869389f6fc21b097cad4e.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2020/15828e92c2988bf012bcdf74e67aac40.png">
+<meta property="article:published_time" content="2020-12-24T08:13:54.000Z">
+<meta property="article:modified_time" content="2021-04-14T08:11:41.407Z">
+<meta property="article:author" content="york">
+<meta property="article:tag" content="函数">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://images.xiaozhuanlan.com/photo/2020/e0cf9f3b0419b99e8b8b51e499dda7dd.png">
+
+
+<link rel="canonical" href="https://github.com/Ay31/blog/2020/12/24/JavaScript%E8%BF%9B%E9%98%B6/%E5%87%BD%E6%95%B0/1.V8%E5%BC%95%E6%93%8E%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;github.com&#x2F;Ay31&#x2F;blog&#x2F;2020&#x2F;12&#x2F;24&#x2F;JavaScript%E8%BF%9B%E9%98%B6&#x2F;%E5%87%BD%E6%95%B0&#x2F;1.V8%E5%BC%95%E6%93%8E%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84&#x2F;&quot;,&quot;path&quot;:&quot;2020&#x2F;12&#x2F;24&#x2F;JavaScript进阶&#x2F;函数&#x2F;1.V8引擎是如何工作的&#x2F;&quot;,&quot;title&quot;:&quot;V8引擎是如何工作的&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>V8引擎是如何工作的 | y31's blog</title><script src="/blog/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">y31's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Scanner"><span class="nav-number">1.</span> <span class="nav-text">Scanner</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parser"><span class="nav-number">2.</span> <span class="nav-text">Parser</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E8%A7%A3%E6%9E%90-pre-parsing-Layze"><span class="nav-number">2.1.</span> <span class="nav-text">预解析 pre-parsing: Layze</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E9%87%8F%E8%A7%A3%E6%9E%90-Full-parsing-Eage"><span class="nav-number">2.2.</span> <span class="nav-text">全量解析 Full-parsing: Eage</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ignition"><span class="nav-number">3.</span> <span class="nav-text">Ignition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TurboFan"><span class="nav-number">4.</span> <span class="nav-text">TurboFan</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">4.1.</span> <span class="nav-text">优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Orinoco"><span class="nav-number">5.</span> <span class="nav-text">Orinoco</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="york"
+      src="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+  <p class="site-author-name" itemprop="name">york</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="mailto:525998520@qq.com" title="E-Mail → mailto:525998520@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Ay31/blog/2020/12/24/JavaScript%E8%BF%9B%E9%98%B6/%E5%87%BD%E6%95%B0/1.V8%E5%BC%95%E6%93%8E%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+      <meta itemprop="name" content="york">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="y31's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          V8引擎是如何工作的
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-24 16:13:54" itemprop="dateCreated datePublished" datetime="2020-12-24T16:13:54+08:00">2020-12-24</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-04-14 16:11:41" itemprop="dateModified" datetime="2021-04-14T16:11:41+08:00">2021-04-14</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/JavaScript%E8%BF%9B%E9%98%B6/" itemprop="url" rel="index"><span itemprop="name">JavaScript进阶</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">Scanner Parser 预解析 ...</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>JavaScript引擎也是一个应用程序，是JavaScript的执行环境，是浏览器的组成部分，每个浏览器对应的JavaScript引擎不同，chrome是v8，firefox是SpiderMonkey，safari是Nitro</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2020/e0cf9f3b0419b99e8b8b51e499dda7dd.png"></p>
+<p>Blink 是谷歌浏览器的渲染引擎，V8 是 Blink 的内置 JavaScript 引擎</p>
+<h2 id="Scanner"><a href="#Scanner" class="headerlink" title="Scanner"></a>Scanner</h2><p>scanner 是一个扫描器，用于对纯文本的 JavaScript 代码进行词法分析。它会将代码分析为 token</p>
+<p><em>token:是指语法上不能再分割的最小单位，可能是单个字符，也可能是一个字符串</em></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">20</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">&quot;type&quot;</span>: <span class="string">&quot;Keyword&quot;</span>,</span><br><span class="line">    <span class="string">&quot;value&quot;</span>: <span class="string">&quot;const&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">&quot;type&quot;</span>: <span class="string">&quot;Identifier&quot;</span>,</span><br><span class="line">    <span class="string">&quot;value&quot;</span>: <span class="string">&quot;a&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">&quot;type&quot;</span>: <span class="string">&quot;Punctuator&quot;</span>,</span><br><span class="line">    <span class="string">&quot;value&quot;</span>: <span class="string">&quot;=&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">&quot;type&quot;</span>: <span class="string">&quot;Numeric&quot;</span>,</span><br><span class="line">    <span class="string">&quot;value&quot;</span>: <span class="string">&quot;20&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>代码对应<strong>token</strong>集合</p>
+<h2 id="Parser"><a href="#Parser" class="headerlink" title="Parser"></a>Parser</h2><p>parser 模块可以理解为是一个解析器。解析过程是一个语法分析的过程，它会将词法分析结果 tokens 转换为抽象语法树「Abstract Syntax Tree」，同时会验证语法，如果有错误就抛出语法错误。</p>
+<p><strong>parser 的解析有两种情况，预解析与全量解析</strong></p>
+<p><em>JavaScript代码转为AST - <a target="_blank" rel="noopener" href="https://esprima.org/demo/parse.html">esprima</a></em></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;type&quot;</span>: <span class="string">&quot;Program&quot;</span>,</span><br><span class="line">  <span class="string">&quot;body&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&quot;type&quot;</span>: <span class="string">&quot;VariableDeclaration&quot;</span>,</span><br><span class="line">      <span class="string">&quot;declarations&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="string">&quot;type&quot;</span>: <span class="string">&quot;VariableDeclarator&quot;</span>,</span><br><span class="line">          <span class="string">&quot;id&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;type&quot;</span>: <span class="string">&quot;Identifier&quot;</span>,</span><br><span class="line">            <span class="string">&quot;name&quot;</span>: <span class="string">&quot;a&quot;</span></span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="string">&quot;init&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;type&quot;</span>: <span class="string">&quot;Literal&quot;</span>,</span><br><span class="line">            <span class="string">&quot;value&quot;</span>: <span class="number">20</span>,</span><br><span class="line">            <span class="string">&quot;raw&quot;</span>: <span class="string">&quot;20&quot;</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      <span class="string">&quot;kind&quot;</span>: <span class="string">&quot;const&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">&quot;sourceType&quot;</span>: <span class="string">&quot;script&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码对应抽象语法树</p>
+<h3 id="预解析-pre-parsing-Layze"><a href="#预解析-pre-parsing-Layze" class="headerlink" title="预解析 pre-parsing: Layze"></a>预解析 pre-parsing: Layze</h3><p>代码中有大量未被使用的部分，若全都进行Full-parsing ，解析过程会浪费许多实际，做无用功</p>
+<p>预解析的方案，它在提高代码执行效率上起到了非常关键的作用。它有如下特点</p>
+<ul>
+<li><p>预解析会跳过未被使用的代码</p>
+</li>
+<li><p>不会生成 AST，会产生不带有变量引用和声明的 scopes 信息</p>
+</li>
+<li><p>解析速度快</p>
+</li>
+<li><p>根据规范抛出特定的错误</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;foo1&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;foo2&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo2();</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://images.xiaozhuanlan.com/photo/2020/1e5c57c8c0d89b6da647f60034ca746c.png"></p>
+<p>只有foo2被执行，foo1就是被预解析，但会生成作用域链 [[scope]]</p>
+<h3 id="全量解析-Full-parsing-Eage"><a href="#全量解析-Full-parsing-Eage" class="headerlink" title="全量解析 Full-parsing: Eage"></a>全量解析 Full-parsing: Eage</h3><p>检测到代码会被执行或立即执行时，会生成AST，即全量解析</p>
+<ul>
+<li>解析被使用的代码</li>
+<li>生成 AST</li>
+<li>构建具体的 scopes 信息，变量的引用，声明等</li>
+<li>抛出所有的语法错误</li>
+</ul>
+<p>全量解析后会创建执行上下文（定义变量/方法） <em>作用域与作用域链的信息是在预解析阶段就已经明确了</em></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明时未调用，因此会被认为是不被执行的代码，进行预解析</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;foo&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明时未调用，因此会被认为是不被执行的代码，进行预解析</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数立即执行，只进行一次全量解析</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行 foo，那么需要重新对 foo 函数进行全量解析，此时 foo 函数被解析了两次 </span></span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+
+<p>如果在函数 foo 里面再次声明一个函数，foo 内部的函数也会被跟着解析两次（如果foo内部执行该函数）。嵌套层级太深甚至会导致更多次数的解析。因此，减少不必要的嵌套函数，能提高代码的执行效率。</p>
+<p><strong>注意</strong>：V8 引擎会对 parser 阶段的解析结果，缓存 3 天，不怎么变动的代码打包在一起，如公共代码，把经常变动的业务代码等打包到另外的 js 文件中，能够有效的提高执行效率。</p>
+<h2 id="Ignition"><a href="#Ignition" class="headerlink" title="Ignition"></a>Ignition</h2><img src="https://images.xiaozhuanlan.com/photo/2020/f8070c8e4e6626ecdb54b35d2c3b4289.png" style="zoom:50%;" />
+
+<p>Ignition 是 v8 提供的一个解释器。作用是负责将抽象语法树 AST 转换为字节码「bytecode」。并且同时收集下一个阶段「编译」所需要的信息。这个过程，也可以理解为预编译过程。基于性能的考虑，预编译过程与编译过程有的时候不会区分的那么明显，有的代码在预编译阶段就能直接执行</p>
+<h2 id="TurboFan"><a href="#TurboFan" class="headerlink" title="TurboFan"></a>TurboFan</h2><img src="https://images.xiaozhuanlan.com/photo/2020/ba77812fd31869389f6fc21b097cad4e.png" style="zoom:50%;" />
+
+<p>TurboFan 是 v8 引擎的编译器模块。它会利用 Ignition 收集到的信息，将字节码转换为汇编代码，这也就是代码被最终执行的阶段</p>
+<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><p>提高代码执行效率，<strong>不要总是改变对象类型。</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> obj.name</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">obj0 = &#123;</span><br><span class="line">  name: <span class="string">&#x27;Alex&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj1 = &#123;</span><br><span class="line">  name: <span class="string">&#x27;tom&#x27;</span>,</span><br><span class="line">  age: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj2 = &#123;</span><br><span class="line">  name: <span class="string">&#x27;Jake&#x27;</span>,</span><br><span class="line">  age: <span class="number">1</span>,</span><br><span class="line">  gender: <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于JavaScript的动态性，并不能确定obj的类型，对于编译器而言obj1,obj2,obj3是三种不同的类型，TurboFan 无法针对优化，只能 De-optimize 操作。这意味着执行效率的降低</p>
+<p>因此，定义函数时，严格要求参数格式保持一致，在实践中是非常重要的优化策略，这也是 typescript 的作用之一。</p>
+<h2 id="Orinoco"><a href="#Orinoco" class="headerlink" title="Orinoco"></a>Orinoco</h2><img src="https://images.xiaozhuanlan.com/photo/2020/15828e92c2988bf012bcdf74e67aac40.png" style="zoom:25%;" />
+
+<p>执行的 JavaScript 代码中，有大量的垃圾内存需要处理。甚至绝大多数内存占用都是垃圾。因此我们必须有一个机制来管理这些垃圾内存，用于回收利用。这就是垃圾回收器 Orinoco。</p>
+<p>垃圾回收器会定期的执行以下任务</p>
+<ul>
+<li>标记活动对象，和非活动对象「标记阶段」</li>
+<li>回收被非活动对象占用的内存空间「清除阶段」</li>
+<li>合并或者整理内存「整理阶段」</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>v8 的 Compiler Pipeline 并非一开始就是使用的 Ignition + TurboFan 组合。也是在不断的迭代过程中演变而来。例如在他们之前，是 Full-codegen + Crankshaft，并且他们也共存过一段时间。</p>
+<p>在官方文档中，提供了<a target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1chhN90uB8yPaIhx_h2M3lPyxPgdPmkADqSNAoXYQiVE/edit#slide=id.g18d89eb289_1_389">一个 PPT</a>，我们可以观察不同版本的演变过程。该 PPT 介绍了为何要使用新的编译组合。</p>
+<ul>
+<li>减少了内存占用</li>
+<li>减少了启动时间</li>
+<li>降低了复杂度</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/%E5%87%BD%E6%95%B0/" rel="tag"># 函数</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/2020/11/16/Vue%E5%85%A5%E9%97%A8/%E8%99%9A%E6%8B%9FDom/" rel="prev" title="虚拟 Dom">
+                  <i class="fa fa-chevron-left"></i> 虚拟 Dom
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/2020/12/24/JavaScript%E8%BF%9B%E9%98%B6/%E5%87%BD%E6%95%B0/2.%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/" rel="next" title="作用域与作用域链">
+                  作用域与作用域链 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/blog/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">york</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/schemes/muse.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;github.com&quot;,&quot;root&quot;:&quot;&#x2F;blog&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;blog&#x2F;images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.3.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta name="description" content="组成 Function Realm 环境记录对象 ...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="执行上下文">
+<meta property="og:url" content="https://github.com/Ay31/blog/2020/12/28/JavaScript%E8%BF%9B%E9%98%B6/%E5%87%BD%E6%95%B0/4.%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/index.html">
+<meta property="og:site_name" content="y31&#39;s blog">
+<meta property="og:description" content="组成 Function Realm 环境记录对象 ...">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2020/b1d113f66f7ee892315f4b8928236211.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2020/d7d5904374fde9f42d6a2277e5113451.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2020/14e745e6cbbb5b6bddd57e3971d3d315.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2020/8628f8ff00b43405c718fb15d98d2635.png">
+<meta property="article:published_time" content="2020-12-28T08:53:54.000Z">
+<meta property="article:modified_time" content="2021-04-14T08:16:49.146Z">
+<meta property="article:author" content="york">
+<meta property="article:tag" content="函数">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://images.xiaozhuanlan.com/photo/2020/b1d113f66f7ee892315f4b8928236211.png">
+
+
+<link rel="canonical" href="https://github.com/Ay31/blog/2020/12/28/JavaScript%E8%BF%9B%E9%98%B6/%E5%87%BD%E6%95%B0/4.%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;github.com&#x2F;Ay31&#x2F;blog&#x2F;2020&#x2F;12&#x2F;28&#x2F;JavaScript%E8%BF%9B%E9%98%B6&#x2F;%E5%87%BD%E6%95%B0&#x2F;4.%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87&#x2F;&quot;,&quot;path&quot;:&quot;2020&#x2F;12&#x2F;28&#x2F;JavaScript进阶&#x2F;函数&#x2F;4.执行上下文&#x2F;&quot;,&quot;title&quot;:&quot;执行上下文&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>执行上下文 | y31's blog</title><script src="/blog/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">y31's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E6%88%90"><span class="nav-number">1.</span> <span class="nav-text">组成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#code-evaluation-state"><span class="nav-number">1.1.</span> <span class="nav-text">code evaluation state</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Function"><span class="nav-number">1.2.</span> <span class="nav-text">Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Realm"><span class="nav-number">1.3.</span> <span class="nav-text">Realm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LexicalEnvironment"><span class="nav-number">1.4.</span> <span class="nav-text">LexicalEnvironment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VariableEnvironment"><span class="nav-number">1.5.</span> <span class="nav-text">VariableEnvironment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">1.6.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ScriptOrModule"><span class="nav-number">1.7.</span> <span class="nav-text">ScriptOrModule</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E8%AE%B0%E5%BD%95%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text">环境记录对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%8E%AF%E5%A2%83%E8%AE%B0%E5%BD%95"><span class="nav-number">2.1.</span> <span class="nav-text">函数环境记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%8E%AF%E5%A2%83%E8%AE%B0%E5%BD%95"><span class="nav-number">2.2.</span> <span class="nav-text">模块环境记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%8E%AF%E5%A2%83%E8%AE%B0%E5%BD%95"><span class="nav-number">2.3.</span> <span class="nav-text">对象环境记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E7%8E%AF%E5%A2%83%E8%AE%B0%E5%BD%95"><span class="nav-number">2.4.</span> <span class="nav-text">全局环境记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87"><span class="nav-number">2.5.</span> <span class="nav-text">变量提升</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Local%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">Local对象</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="york"
+      src="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+  <p class="site-author-name" itemprop="name">york</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="mailto:525998520@qq.com" title="E-Mail → mailto:525998520@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Ay31/blog/2020/12/28/JavaScript%E8%BF%9B%E9%98%B6/%E5%87%BD%E6%95%B0/4.%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/04/14/g9pWMSePtKBiRzl.jpg">
+      <meta itemprop="name" content="york">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="y31's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          执行上下文
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-28 16:53:54" itemprop="dateCreated datePublished" datetime="2020-12-28T16:53:54+08:00">2020-12-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-04-14 16:16:49" itemprop="dateModified" datetime="2021-04-14T16:16:49+08:00">2021-04-14</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/JavaScript%E8%BF%9B%E9%98%B6/" itemprop="url" rel="index"><span itemprop="name">JavaScript进阶</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">组成 Function Realm 环境记录对象 ...</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在 ECMAScript 中，执行上下文是一种用于跟踪代码执行状态的抽象规范。</p>
+<p>每一个函数调用，都会创建一个新的执行上下文。<strong>函数调用栈</strong>用于管理所有的执行上下文。在任何时候，只能有一个执行上下文正在执行，我们可以称之为<strong>运行时上下文</strong><em>「the running execution context」。</em></p>
+<p>运行时上下文始终处于栈顶。当代码执行过程中，有新的函数调用，新的执行上下文会被创建，入栈，并且成为新的运行时上下文。</p>
+<h2 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h2><img src="https://images.xiaozhuanlan.com/photo/2020/b1d113f66f7ee892315f4b8928236211.png" style="zoom: 50%;" />
+
+<h3 id="code-evaluation-state"><a href="#code-evaluation-state" class="headerlink" title="code evaluation state"></a>code evaluation state</h3><p>执行上下文处于栈顶时，属于执行状态，若执行过程中有新的函数调用，则需要处于挂起状态，新的执行上下文执行完毕后，恢复为执行，code evaluation state 用于记录并控制上下文进入不同的状态中。</p>
+<h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><p>function object 函数对象</p>
+<p>普通对线包含 [[HasProperty]], [[GetOwnProperty]] 等内部方法，函数对线额外包含[[Call]] 与 [[Construct]] 两个内部方法</p>
+<p><em>Call 表示函数可以被其他对象调用，Construct 表示函数可以被当成构造函数用于创建对象。</em></p>
+<p>当前执行上下文处于栈顶时，其对应的 Function Object 可以称为 active function object。</p>
+<h3 id="Realm"><a href="#Realm" class="headerlink" title="Realm"></a>Realm</h3><p>资源域。需要注意的是这个域也表示范围，但是它与作用域是不同的概念。它表示的是当前代码的运行环境范围。例如，两个不同的页面，对应两个不同的域。一个页面中，包含一个 iframe 标签，也表示他们是不同的两个域。</p>
+<p>一个 Realm 域由一个 Realm 记录对象呈现，具体包含如下内部属性：</p>
+<ul>
+<li>[[Intrinsics]] 该属性对应所有的内置对象，例如 Map，JSON等，以及一些全局方法 isNaN，<a target="_blank" rel="noopener" href="https://tc39.es/ecma262/#table-well-known-intrinsic-objects">具体可查看</a></li>
+<li>[[GlobalObject]] 全局对象</li>
+<li>[[GlobalEnv]] 全局环境记录</li>
+<li>[[TemplateMap]] 模板对象列表</li>
+<li>[[HostDefined]] 保留供主机使用的字段，表示与领域相关联的其他信息，通常为 undefined</li>
+</ul>
+<h3 id="LexicalEnvironment"><a href="#LexicalEnvironment" class="headerlink" title="LexicalEnvironment"></a>LexicalEnvironment</h3><p>词法环境，具体表现为一个环境记录对象，let/const会解析到该环境</p>
+<h3 id="VariableEnvironment"><a href="#VariableEnvironment" class="headerlink" title="VariableEnvironment"></a>VariableEnvironment</h3><p>变量环境，var 声明的变量标识符，将会解析到该环境记录对象中。</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>词法环境与变量环境，都是词法环境对象，并且在初始化时，他们具备相同的值。之所以会在一个执行上下文中，同时存在功能类似的两个环境记录对象，原因在于 let/const 与 var 的不同。这是历史原因导致的。<strong>在后续的内容中，词法环境和变量环境统称为词法环境。</strong></p>
+<h3 id="ScriptOrModule"><a href="#ScriptOrModule" class="headerlink" title="ScriptOrModule"></a>ScriptOrModule</h3><p>对应 script 标签或者模块。当代码处于其他环境时，该值为 null</p>
+<h2 id="环境记录对象"><a href="#环境记录对象" class="headerlink" title="环境记录对象"></a>环境记录对象</h2><p>环境记录对象是执行上下文的重要组成部分。它用于根据代码的词法嵌套结构来绑定标识符与特定变量与函数之间的关联关系。因此每一个环境记录对象，都对应一些特定的语法结构。例如函数声明，try catch等。</p>
+<p>通俗来说，环境记录就是用于收集各种变量声明，函数声明等。</p>
+<p>除此之外，每一个环境记录对象都有一个内部字段 [[OuterEnv]]，用于指向外部环境记录。</p>
+<p><strong>与执行上下文一样，环境记录是纯粹的规范机制，无法从外部访问或者操作这些值。</strong></p>
+<img src="https://images.xiaozhuanlan.com/photo/2020/d7d5904374fde9f42d6a2277e5113451.png" style="zoom:50%;" />
+
+<h3 id="函数环境记录"><a href="#函数环境记录" class="headerlink" title="函数环境记录"></a>函数环境记录</h3><p>函数环境记录对应函数的调用。它包含了在函数内部所有声明的变量与方法。并且能够建立一个新的 this 绑定。还支持捕获 super 方法调用所需要的所有参数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> a = <span class="number">20</span>;</span><br><span class="line">  <span class="keyword">const</span> b = <span class="number">30</span>;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 那么 foo 对应的环境记录可以粗略表示为</span></span><br><span class="line">fooRecord = &#123;</span><br><span class="line">  a: <span class="number">20</span>,</span><br><span class="line">  b: <span class="number">30</span>,</span><br><span class="line">  [[outerEnv]]: GlobalEnvironmentRecord</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在内部实现中，变量标识符与环境记录是绑定关系，我们这里只是使用 key-value 的形式来表达这种关系，并非真实呈现。每一个声明性环境记录通过 <strong>var、const、let、class、module、import、function</strong> 等方式与标识符进行绑定。</p>
+<p><strong>注意</strong>：在函数环境记录对象中，存在一个 this 属性。该属性在函数声明时并不确定，只有在函数被调用时，才能明确得知该值的具体指向。</p>
+<h3 id="模块环境记录"><a href="#模块环境记录" class="headerlink" title="模块环境记录"></a><img src="https://images.xiaozhuanlan.com/photo/2020/14e745e6cbbb5b6bddd57e3971d3d315.png" alt="img">模块环境记录</h3><p>模块环境记录包含了所有顶层模块的声明。也包括显示导入的模块。他的内部属性 [[OuterEnv]] 指向全局环境记录。</p>
+<h3 id="对象环境记录"><a href="#对象环境记录" class="headerlink" title="对象环境记录"></a>对象环境记录</h3><p>对象环境记录主要对应的是 with 语句创建的上下文环境。</p>
+<h3 id="全局环境记录"><a href="#全局环境记录" class="headerlink" title="全局环境记录"></a>全局环境记录</h3><p>全局环境记录对应全局声明。它没有外部环境，内部属性 [[OuterEnv]] 的值为 null。它可能预装了标识符绑定，并且包括一个关联的全局对象，该对象的属性提供了某些全局环境的标识符绑定。在代码执行过程中，可以往该全局对象中添加新的属性并修改其值。</p>
+<h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><p>环境记录用于收集各种声明的绑定。在内部实现中，我们可以关注环境记录用于初始化变量声明绑定的方法的描述，例如 <strong>CreateMutableBinding，</strong>该方法用于创建一个新的未被初始化的可变绑定，这里我们重点关注「未被初始化」几个字，也就意味着，此方法将会用于收集某种声明，并且不会立即赋值。可以用一个简单的例子验证。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// Uncaught ReferenceError: Cannot access &#x27;a&#x27; before initialization</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">20</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">20</span></span><br></pre></td></tr></table></figure>
+
+<p>Cannot access ‘a’ before initialization，未初始化之前不能访问变量 a。也就意味着，当我们使用 console.log 访问 a 时，a 已经完成了绑定，只不过还没有赋值。</p>
+<p>当我们把上面例子中，变量声明的方式由 let 修改为 var 时，变量提升的影响会变得更为明显。在声明之前访问变量 a 的值，会发现该值为 undefined。这也是 let/const 与 var 的不同之处。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="literal">undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(a)</span><br><span class="line">a = <span class="number">20</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- 或者内部实现可以体现为 --&gt;</span><br><span class="line"><span class="comment">// 初始化阶段创建绑定</span></span><br><span class="line">envRec.CreateMutableBinding(<span class="string">&#x27;a&#x27;</span>, <span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行阶段设置值</span></span><br><span class="line"><span class="built_in">console</span>.log(a)</span><br><span class="line">envRec.SetMutableBinding(<span class="string">&#x27;a&#x27;</span>, <span class="number">20</span>, <span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+
+<p>使用 function 关键字声明的函数，在变量提升中的体现与 var/let/const 都不一样。function 声明的函数，在初始化时，就会直接赋值指向对应的函数体。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(foo) <span class="comment">// ƒ foo() &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 class 声明的对象，在变量提升中的体现与 let/const 一致。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(A) <span class="comment">// Uncaught ReferenceError: Cannot access &#x27;A&#x27; before initialization</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>新版本中的异常提示：在初始化之前不能访问变量，是在传递一种弱化变量提升概念的意图，变量提升是之前版本对于 undefined 的理解带来的历史遗留问题。</p>
+<p>本质的核心是我们应该理解在执行上下文的创建阶段，环境记录对象会提前收集所有的声明绑定。而在代码执行阶段才会针对每个变量绑定进行赋值操作。</p>
+<h2 id="Local对象"><a href="#Local对象" class="headerlink" title="Local对象"></a>Local对象</h2><p>对于一个函数而言，完整的作用域包含一个函数自身的 Local 对象。</p>
+<p>仅仅只有处于栈顶的执行上下文，才会生成 Local 对象。并且 Local 对象的具体内容会在执行上下文的生命周期中不断变化。也就意味着，在执行上下文的创建阶段，只有函数参数、function 声明的变量、this 指向 能够明确具体的值，其他变量的初始值都为 undefined，然后在代码执行过程中逐步明确赋值。</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2020/8628f8ff00b43405c718fb15d98d2635.png" alt="image.png"></p>
+<p>需要注意的是，Local 对象与环境记录对象非常相似，但他们并非相同的对象。不过这样的差别仅仅只是体现在具体的实现上，从理解执行上下文运行机制的理论角度来说，我们可以认为他们是同一个对象。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/%E5%87%BD%E6%95%B0/" rel="tag"># 函数</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/2020/12/24/JavaScript%E8%BF%9B%E9%98%B6/%E5%87%BD%E6%95%B0/3.%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88/" rel="prev" title="函数调用栈">
+                  <i class="fa fa-chevron-left"></i> 函数调用栈
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/2020/12/31/JavaScript%E8%BF%9B%E9%98%B6/%E5%87%BD%E6%95%B0/5.%E9%97%AD%E5%8C%85/" rel="next" title="闭包">
+                  闭包 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/blog/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">york</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/schemes/muse.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
